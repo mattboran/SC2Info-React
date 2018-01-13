@@ -1,19 +1,34 @@
 .Header {
-    text-align: center;
+    /*This is the container*/
     background-color: #222;
-    padding: 20px;
     border: 1px solid #000;
-    align-content: flex-start;
-    align-items: center;
-    flex-flow: row wrap;
     display: flex;
+    justify-content: space-around;
 }
 .Header-logo{
     background-color: #222;
-    align-self: center;
+    align-self: flex-start;
+    max-width: 15%;
+    min-width: 10%;
+    flex: 4 0 0;
+    
 }
-Header-text{
+.Header-links{
+    color: #fff;
+    display: flex;
+    justify-content: flex-end;
     align-self: center;
+    flex: 1 0 0;
+}
+.Header-signup{
+    margin: 20px;
+}
+.Header-login{
+    margin: 20px;
+    
+}
+.Header-search{
+    margin: 20px;
 }
 .Header span{
     flex-direction: column;

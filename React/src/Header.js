@@ -6,8 +6,13 @@ class Header extends Component{
         return(
             <div className="Header">
                 <img src={sc2logo} className="Header-logo" />
+                <div className = "Header-links">
+                    <div className = "Header-search"> SearchBox </div>
+                    <div className = "Header-login"> Login </div>
+                    <div className = "Header-signup"> Signup </div>
+                </div>
                 <div className = "Header-text">
-                    <span>SC2 Info by ThatDude33</span>
+                
                 </div>
             </div>
         );
