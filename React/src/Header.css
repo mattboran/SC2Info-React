@@ -1,0 +1,22 @@
+.Header {
+    text-align: center;
+    background-color: #222;
+    padding: 20px;
+    border: 1px solid #000;
+    align-content: flex-start;
+    align-items: center;
+    flex-flow: row wrap;
+    display: flex;
+}
+.Header-logo{
+    background-color: #222;
+    align-self: center;
+}
+Header-text{
+    align-self: center;
+}
+.Header span{
+    flex-direction: column;
+    color: white;
+    align-self: flex-end;
+}
