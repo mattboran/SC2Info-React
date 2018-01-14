@@ -8,10 +8,11 @@
 .Header-logo{
     background-color: #222;
     align-self: flex-start;
-    max-width: 15%;
-    min-width: 10%;
     flex: 4 0 0;
-    
+    max-width: 30%;
+    min-width: 10%;
+    max-height:30%;
+    min-height:10%;
 }
 .Header-links{
     color: #fff;
@@ -25,7 +26,6 @@
 }
 .Header-login{
     margin: 20px;
-    
 }
 .Header-search{
     margin: 20px;
