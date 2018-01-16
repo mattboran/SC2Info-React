@@ -1,6 +1,6 @@
 // React imports
 import React, { Component } from 'react';
-import {Route, BrowserRouter} from 'react-router-dom';
+import {Route, Switch, BrowserRouter} from 'react-router-dom';
 // Google MaterialUI Imports
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -8,10 +8,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Header from './Header';
 import SignIn from './SignIn';
 import Register from './Register';
-import Home from './Home';
+import News from './News';
 // Styles and Fonts
 import {grey900, grey700, grey500,grey200} from 'material-ui/styles/colors'
-import './css/App.css';
+// import './css/App.css';
 
 const muiTheme = getMuiTheme({
     palette: {
@@ -39,43 +39,29 @@ class App extends Component {
     constructor() {
       super();
       this.state = {
-          showHeader: true
+          showHeader: true,
+          loggedIn: false
       };
-      this.handleClickLogin = this.handleClickLogin.bind(this);
-      this.handleClickRegister = this.handleClickRegister.bind(this);
     }
 
-    handleClickLogin(){
-        this.setState({
-            showHeader: false
-        });
-    }
-
-    handleClickRegister(){
-        this.setState({
-            showHeader: false
-        });
-    }
-
-    generateHeader(){
-        let content = null;
-        if(this.state.showHeader){
-            content = <Header />;
-        }
-        return content;
+    getLoggedInState = (loggedInData) => {
+        return this.state;
     }
 
     render(){
         return(
-        <MuiThemeProvider muiTheme={muiTheme}>
-            <Header/>
-            <BrowserRouter>
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <BrowserRouter>
                 <div>
-                    <Route path="/Home" component={Home}/>
-                    <Route path="/SignInOrRegister" component={SignInOrRegister}/>
+                    <Header />
+                    <Switch>
+                        <Route exact path="/" component ={null}/>
+                        <Route path="/News" exactly component={News}/>
+                        <Route path="/SignInOrRegister" component={SignInOrRegister}/>
+                    </Switch>
                 </div>
-            </BrowserRouter>
-        </MuiThemeProvider>
+                </BrowserRouter>
+            </MuiThemeProvider>
         );
     }
  

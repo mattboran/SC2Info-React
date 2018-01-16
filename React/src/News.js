@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 
-class Home extends Component{
+class News extends Component{
     render(){
         return(
+            // <PageWrapper >
             <div>
             <h2>Homepage</h2>
             <p>There will be links here:</p>
@@ -14,8 +15,9 @@ class Home extends Component{
               <li>Id porttitor</li>
             </ol>
           </div>
+        //   </PageWrapper>
         );
     }
 }
 
-export default Home;
+export default News;
