@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 export default class Image extends Component {
     render(){
-        let {mode, source, height, width, style, ...props} = this.props;
+        let {mode, source, color, height, width, style, ...props} = this.props;
         let modes = {
             'fill':'cover',
             'fit' : 'contain'
@@ -19,6 +19,7 @@ export default class Image extends Component {
         let important = {
             backgroundImage: 'url('+source+')',
             backgroundSize: size,
+            backgroundColor: {color},
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat'
         };
