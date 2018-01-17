@@ -19,6 +19,7 @@
     "react-scripts": "1.0.17",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
+    "styled-components": "^2.4.0",
     "webpack": "^3.10.0"
   },
   "scripts": {
