@@ -7,6 +7,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // Pages in the app
 import SignIn from './components/SignIn';
 import Register from './components/Register';
+import LadderInfo from './components/LadderInfo';
 import News from './components/News';
 // Styles and Fonts
 import {grey900, grey700, grey500,grey200} from 'material-ui/styles/colors'
@@ -35,6 +36,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component ={News} />
                         <Route exact path="/News"  component={News}/>
+                        <Route exact path="/LadderInfo"  component={LadderInfo}/>
                         <Route exact path="/SignIn" component={SignIn} signIn={true}/>
                         <Route exact path="/Register" component={Register} signIn={true}/>
                     </Switch>
