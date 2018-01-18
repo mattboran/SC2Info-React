@@ -5,7 +5,6 @@ import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // Pages in the app
-import Header from './components/shared/Header';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
 import News from './components/News';
@@ -20,7 +19,6 @@ class App extends Component {
     constructor() {
       super();
       this.state = {
-          showHeader: true,
           loggedIn: false
         };
     }
@@ -31,17 +29,18 @@ class App extends Component {
 
     render(){
         return(
+            <div> 
             <MuiThemeProvider muiTheme={muiTheme}>
                 <Router history={history}>
-                <div> 
                     <Switch>
-                        <Route exact path="/" component ={News}/>
+                        <Route exact path="/" component ={News} />
                         <Route exact path="/News"  component={News}/>
-                        <Route exact path="/SignIn" component={SignIn}/>
+                        <Route exact path="/SignIn" component={SignIn} signIn={true}/>
+                        <Route exact path="/Register" component={Register} signIn={true}/>
                     </Switch>
-                </div>
                 </Router>
             </MuiThemeProvider>
+            </div>
         );
     }
     

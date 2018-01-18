@@ -1,26 +1,57 @@
 import React, {Component} from 'react';
+import { withRouter} from 'react-router-dom';
+import {RaisedButton, FlatButton, TextField, Paper} from 'material-ui';
 import Header from './shared/Header';
-class SignIn extends Component{
+import styles from './shared/FormStyles';
 
-    render(){
-        
+class SignIn extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            username:'',
+            password:''
+        }
+        this.handleRegisterClick = this.handleRegisterClick.bind(this);
+    }
+
+    handleRegisterClick(){
+        this.props.history.replace("/Register");
+    }
+
+    render(){    
         return(
-            <div>
-                <Header signIn={true}/>
-                <div>
-                    <h2>Signin Page</h2>
-                    <p>Cras facilisis urna ornare ex volutpat, et
-                    convallis erat elementum. Ut aliquam, ipsum vitae
-                    gravida suscipit, metus dui bibendum est, eget rhoncus nibh
-                    metus nec massa. Maecenas hendrerit laoreet augue
-                    nec molestie. Cum sociis natoque penatibus et magnis
-                    dis parturient montes, nascetur ridiculus mus.</p>
-            
-                    <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
+            <div >
+                <Header props={this.props} signIn={true}/>
+                <div style={styles.div}>
+                <Paper style={styles.paper} zDepth={3}>
+                    <TextField
+                        hintText="Enter your username"
+                        floatingLabelText="Username"
+                        onChange = {(event, newValue)=>
+                            this.setState({username:newValue})}
+                        style={styles.textField}/>
+                    <br/>
+                    <TextField
+                        type="password"
+                        hintText="Enter your password"
+                        floatingLabelText="Password"
+                        onChange = {(even, newValue)=>
+                            this.setState({password:newValue})}
+                        style={styles.textField}/>
+                    <br/>
+                    <RaisedButton label="Login"
+                        primary={true} 
+                        style={styles.button}
+                        onClick={(event) =>this.handleClick(event)}/>
+                    <FlatButton label="Sign Up"
+                        primary={true}
+                        style={styles.button}
+                        onClick={this.handleRegisterClick}/>
+                </Paper>
                 </div>
             </div>
         );
     }
 } 
 
-export default SignIn;
+export default withRouter(SignIn);

@@ -1,22 +1,72 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
+import {Paper, TextField, RaisedButton, FlatButton} from 'material-ui';
+import Header from './shared/Header';
+import styles from './shared/FormStyles';
 
 class Register extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            email:'',
+            username:'',
+            password:'',
+            confirmPassword:''
+        }
+        this.handleBackToLoginClick = this.handleBackToLoginClick.bind(this);
+    }
+
+    handleBackToLoginClick(){
+        this.props.history.replace("/SignIn")
+    }
     render(){
         return(
-            <div>
-            <h2>Register</h2>
-            <p>Mauris sem velit, vehicula eget sodales vitae,
-            rhoncus eget sapien:</p>
-            <ol>
-              <li>Nulla pulvinar diam</li>
-              <li>Facilisis bibendum</li>
-              <li>Vestibulum vulputate</li>
-              <li>Eget erat</li>
-              <li>Id porttitor</li>
-            </ol>
-          </div>
+            <div >
+                <Header props={this.props} signIn={true}/>
+                <div style={styles.div}>
+                <Paper style={styles.paper} zDepth={3}>
+                    <TextField
+                            hintText="Enter your email"
+                            floatingLabelText="Email"
+                            onChange = {(event, newValue)=>
+                                this.setState({email:newValue})}
+                            style={styles.textField}/>
+
+                    <TextField
+                        hintText="Enter your username"
+                        floatingLabelText="Username"
+                        onChange = {(event, newValue)=>
+                            this.setState({username:newValue})}
+                        style={styles.textField}/>
+                    
+                    <TextField
+                        type="password"
+                        hintText="Enter your password"
+                        floatingLabelText="Password"
+                        onChange = {(even, newValue)=>
+                            this.setState({password:newValue})}
+                        style={styles.textField}/>
+                    <TextField
+                        type="password"
+                        hintText="Confirm your password"
+                        floatingLabelText="Password"
+                        onChange = {(even, newValue)=>
+                            this.setState({confirmPassword:newValue})}
+                        style={styles.textField}/>
+
+                    <RaisedButton label="Register"
+                        primary={true} 
+                        style={styles.button}
+                        onClick={(event) =>this.handleClick(event)}/>
+                    <FlatButton label="Back to Login"
+                        primary={true}
+                        style={styles.button}
+                        onClick={this.handleBackToLoginClick}/>
+                </Paper>
+                </div>
+            </div>
         );
     }
 }
 
-export default Register;
+export default withRouter(Register);
