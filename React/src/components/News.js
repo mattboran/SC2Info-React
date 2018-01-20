@@ -1,21 +1,29 @@
 import React, {Component} from 'react';
 import Header from './shared/Header';
 class News extends Component{
+    state = {
+        loading: true,
+        newsItems: []
+    }
+
+    componentDidMount() {
+        fetch('/news')
+            .then(res => res.json())
+            .then(newsItems => this.setState({ newsItems }));
+        this.setState({ loading: false })
+    }
     render(){
-        
+        if (this.state.loading) {
+            return   
+        }
         return(
             <div>
                 <Header signIn={false} />
                     <div>
-                    <h2>Homepage</h2>
-                    <p>There will be links here:</p>
-                    <ol>
-                    <li>Nulla pulvinar diam</li>
-                    <li>Facilisis bibendum</li>
-                    <li>Vestibulum vulputate</li>
-                    <li>Eget erat</li>
-                    <li>Id porttitor</li>
-                    </ol>
+                    <h2>SC2 News / Homepage</h2>
+                    {this.state.newsItems.map(newsItem =>
+                        <div key={newsItem.id}>{newsItem.title}</div>
+                        )}
                 </div>
             </div>
         );

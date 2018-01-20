@@ -15,8 +15,7 @@ require('dotenv').load();
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-console.log('Loaded PORT env value: ', process.env.PORT )
-console.log('App port is: ', port);
+console.log('Server port is: ', port);
 /**
  * Create HTTP server.
  */
