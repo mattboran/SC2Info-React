@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter} from 'react-router-dom';
 import {RaisedButton, FlatButton, TextField, Paper} from 'material-ui';
-import Header from './shared/Header';
+
 import styles from './shared/FormStyles';
 
 class SignIn extends Component{
@@ -18,10 +18,9 @@ class SignIn extends Component{
         this.props.history.replace("/Register");
     }
 
-    render(){    
+    render(){
         return(
             <div >
-                <Header props={this.props} signIn={true}/>
                 <div style={styles.div}>
                 <Paper style={styles.paper} zDepth={3}>
                     <TextField
@@ -40,7 +39,7 @@ class SignIn extends Component{
                         style={styles.textField}/>
                     <br/>
                     <RaisedButton label="Login"
-                        primary={true} 
+                        primary={true}
                         style={styles.button}
                         onClick={(event) =>this.handleClick(event)}/>
                     <FlatButton label="Sign Up"
@@ -52,6 +51,6 @@ class SignIn extends Component{
             </div>
         );
     }
-} 
+}
 
 export default withRouter(SignIn);

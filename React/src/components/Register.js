@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {Paper, TextField, RaisedButton, FlatButton} from 'material-ui';
-import Header from './shared/Header';
 import styles from './shared/FormStyles';
 
 class Register extends Component{
@@ -22,7 +21,6 @@ class Register extends Component{
     render(){
         return(
             <div >
-                <Header props={this.props} signIn={true}/>
                 <div style={styles.div}>
                 <Paper style={styles.paper} zDepth={3}>
                     <TextField
@@ -38,7 +36,7 @@ class Register extends Component{
                         onChange = {(event, newValue)=>
                             this.setState({username:newValue})}
                         style={styles.textField}/>
-                    
+
                     <TextField
                         type="password"
                         hintText="Enter your password"
@@ -55,7 +53,7 @@ class Register extends Component{
                         style={styles.textField}/>
 
                     <RaisedButton label="Register"
-                        primary={true} 
+                        primary={true}
                         style={styles.button}
                         onClick={(event) =>this.handleClick(event)}/>
                     <FlatButton label="Back to Login"

@@ -17,11 +17,16 @@ class NavBar extends Component{
     }
 
     render(){
-        
+
         const iconColor = 'white';
         const hoverIconColor = 'gray';
 
-        if (!this.props.signIn){
+        const typeOfNavbar = (location) => (route) => !!matchPath(location.pathname, { path: route, exact: true }) ? false : true;
+
+        const {location} = this.props;
+        const matchNavbarType = typeOfNavbar(location);
+
+        if (matchNavbarType('/SignIn') && matchNavbarType('/Register')){
             return(
                 <NavLinks {...this.props}/>
             );
@@ -30,46 +35,44 @@ class NavBar extends Component{
             <IconButton
                  props={IconButtonProps}
                  onClick={this.goBack}>
-                 <FontIcon color={iconColor} 
+                 <FontIcon color={iconColor}
                     hoverColor={hoverIconColor}
                     className="material-icons">
                         clear
                     </FontIcon>
-        
+
             </IconButton>
         );
     }
 }
 
-class NavLinks extends  Component{    
+class NavLinks extends  Component{
 
     render(){
-        const mountTabValueFactory = (location, tabId) => (route) => !!matchPath(location.pathname, { path: route, exact: true }) ? tabId : 0.4;
+        const mountTabValueFactory = (location, tabId) => (route) => !!matchPath(location.pathname, { path: route, exact: true }) ? tabId : Infinity;
 
         const tabId = 'navTabId';
-        const {location, match} = this.props;
+        const {location} = this.props;
         const getTabValue = mountTabValueFactory(location, tabId);
-        console.log("Route = "+'/:id');
-        console.log("mountTabValueFactory ("+location+", "+(tabId)+")");
         return(
             <ToolbarGroup>
                 <StyledTabs value={tabId}>
-                    <StyledTab 
+                    <StyledTab
                         value={getTabValue('/News')}
                         label="SC2 News"
                         containerElement={<Link to="/News"/>}/>
-                    <StyledTab 
+                    <StyledTab
                         value={getTabValue('/LadderInfo')}
                         label="Ladder Info"
                         containerElement={<Link to="/LadderInfo"/>}/>
-                    <StyledTab 
+                    <StyledTab
                         value={getTabValue('/PlayerRank')}
                         label="Player Rank" />
                 </StyledTabs>
                 <FlatButton label="Sign In or Register"
                             primary={true}
                             labelStyle={{color:'white', fontWeight:550}}
-                            containerElement={<Link to="/SignIn"/>}/> 
+                            containerElement={<Link to="/SignIn"/>}/>
             </ToolbarGroup>
         )
     }
@@ -80,7 +83,7 @@ class Header extends Component{
     // Determine NavLinks content based on prop passed to header
     render(){
         return(
-            <StyledAppBar title="" 
+            <StyledAppBar title=""
                 iconElementLeft = {
                     // TODO: Wrap this Image in ImageLink
                     <a href={battleNetLink}>
@@ -90,7 +93,7 @@ class Header extends Component{
                 iconElementRight = {
                     <NavBar {...this.props}/>
                 }
-            >                
+            >
             </StyledAppBar>
         );
     }
