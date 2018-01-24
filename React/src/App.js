@@ -1,6 +1,9 @@
 // React imports
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {ActionCreators} from './actions';
 // Google MaterialUI Imports
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -30,7 +33,6 @@ class App extends Component {
         return(
             <div>
             <MuiThemeProvider muiTheme={muiTheme}>
-
                 <div>
                     <Header />
                     <Switch>
@@ -45,7 +47,10 @@ class App extends Component {
             </div>
         );
     }
+}
 
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
 }
 
 const muiTheme = getMuiTheme({
@@ -56,5 +61,5 @@ const muiTheme = getMuiTheme({
         pickerHeaderColor: grey500
     },
 });
-
-export default App;
+//export default App;
+ export default connect(()=>{return {} }, mapDispatchToProps)(App);

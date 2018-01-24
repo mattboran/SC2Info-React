@@ -1,14 +1,6 @@
-import {REQUEST_LOGIN, LOGIN_SUCCESS, LOGIN_FAIL, REQUEST_LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL} from '../constants/ActionTypes';
+import {REQUEST_LOGIN, REQUEST_LOGOUT, LOGIN_SUCCESS, LOGIN_FAIL} from '../actions/user';
+import createReducer from '../lib/createReducer'
 
-const initialState = {
-  id: null,
-  username: '',
-  avatarLink: '',
-  bnetLink: ''
-};
+export const loginReducer = createReducer({}, [
 
-const user = (state = initialState, action) => {
-  switch(action.type){
-
-  }
-}
+]);
