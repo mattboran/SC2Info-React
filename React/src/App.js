@@ -1,6 +1,6 @@
 // React imports
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import {bindActionCreators} from 'redux';
@@ -35,6 +35,7 @@ class App extends Component {
           <Route exact path = "/LadderInfo" component= {LadderInfo} />
           <Route exact path = "/SignIn" component = {SignIn} />
           <Route exact path = "/Register" component = {Register} />
+          <Redirect from="*" to="/News"/>
         </Switch>
       )
 
