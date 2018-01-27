@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
-import * as usersReducer from './user'
+import { routerReducer } from 'react-router-redux';
+import * as userReducer from './user'
 
-const rootReducer = combineReducers(Object.assign(
-  usersReducer,
-));
+const rootReducer = combineReducers({
+  user: userReducer,
+  routing: routerReducer
+});
 
 export default rootReducer;

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Link, withRouter, matchPath} from 'react-router-dom';
+import {Link, matchPath} from 'react-router-dom';
 import {AppBar, ToolbarGroup, Tabs, Tab,
     FontIcon, IconButton, FlatButton} from 'material-ui';
-import styled from 'styled-components';
 
+import styled from 'styled-components';
 import Image from './Image';
 
 class NavBar extends Component{
@@ -79,7 +79,6 @@ class NavLinks extends  Component{
 }
 
 class Header extends Component{
-
     // Determine NavLinks content based on prop passed to header
     render(){
         return(
@@ -119,4 +118,4 @@ const IconButtonProps = {
     tooltipPosition: 'bottom-left',
 };
 
-export default withRouter(Header);
+export default (Header);
