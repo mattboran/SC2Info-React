@@ -18,16 +18,7 @@ import * as ActionCreators from './actions';
 import {grey900, grey700, grey500,grey200} from 'material-ui/styles/colors'
 
 class App extends Component {
-  constructor(props){
-    super(props);
-  }
-  componentWillMount() {
-      // will trigger the callback function whenever a new Route renders a component(as long as this component stays mounted as routes change)
-      this.props.history.listen(() => {
-        // view new URL
-        console.log('New URL', this.props.history.location.pathname);
-      });
-  }
+
     render(){
       const router = (
         <Switch>
