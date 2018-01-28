@@ -1,21 +1,27 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Loader from 'react-loader';
+
+import { fetchNews } from '../lib/api';
 class News extends Component{
-    state = {
-        loading: true,
-        newsItems: []
+  constructor(props){
+    super(props);
+    this.state = {
+      loading: true,
+      newsItems: []
+      }
     }
 
+    getNewsItems() {
+      fetchNews().then((newsItems) => {
+        this.setState({ newsItems });
+      });
+    }
     componentDidMount() {
         // Simulate async call
         setTimeout(() => {
             this.setState({loading: false});
         },2000);
-
-        fetch('/news')
-            .then(res => res.json())
-            .then(newsItems => this.setState({ newsItems }));
-
+        this.getNewsItems();
     }
 
     render(){

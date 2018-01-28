@@ -4,9 +4,13 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import {bindActionCreators} from 'redux';
+
 // Google MaterialUI Imports
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+// Styles and Fonts
+import {grey900, grey700, grey500,grey200} from 'material-ui/styles/colors'
+
 // Pages in the app
 import SignIn from './components/SignIn';
 import Register from './components/Register';
@@ -14,8 +18,6 @@ import LadderInfo from './components/LadderInfo';
 import News from './components/News';
 import Header from './components/shared/Header';
 import * as ActionCreators from './actions';
-// Styles and Fonts
-import {grey900, grey700, grey500,grey200} from 'material-ui/styles/colors'
 
 class App extends Component {
 
