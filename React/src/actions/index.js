@@ -3,7 +3,7 @@ import { history } from '../storeIndex';
 
 export const loginActions = {
   login,
-  logout,
+  logout, 
   register,
 //TODO: add
 }
