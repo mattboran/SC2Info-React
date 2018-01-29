@@ -8,9 +8,12 @@ import rootReducer from './reducers';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const defaultState = {
-  user: ''
+  user: '',
+  routing: routerMiddleware
 }
+
 export const history = createHistory();
+
 const middleware = (
   thunk,
   loggerMiddleware,

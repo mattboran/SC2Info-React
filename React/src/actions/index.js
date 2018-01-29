@@ -1,13 +1,37 @@
-import * as constants from './constants/constants';
+import * as actionConstants from './constants';
 import { history } from '../storeIndex';
+import { registerUser } from '../lib/api';
 
-export const loginActions = {
-  login: null,
+export const userActions = {
+  login:null,
   logout: null,
-  register: null,
+  register,
 //TODO: add
 }
-//
+
+
+function register(user) {
+    return dispatch => {
+        dispatch(request(user));
+
+        registerUser(user)
+            .then(
+                user => {
+                    dispatch(success(user));
+                    history.push('/SignIn');
+                    console.log("Registered!");
+                },
+                error => {
+                    dispatch(failure(error));
+                    console.log("Error, was "+error);
+                }
+            );
+    };
+
+    function request(user, email, password) { return { type: actionConstants.REGISTER_REQUEST, user, email, password } }
+    function success(user) { return { type: actionConstants.REGISTER_SUCCESS, user } }
+    function failure(error) { return { type: actionConstants.REGISTER_FAILURE, error } }
+}
 // function login(username, password){
 //   return dispatch => {
 //     dispatch(request({ username }));

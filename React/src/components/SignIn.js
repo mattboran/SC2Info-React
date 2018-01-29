@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { withRouter} from 'react-router-dom';
 import {RaisedButton, FlatButton, TextField, Paper} from 'material-ui';
 
 import styles from './shared/FormStyles';
@@ -53,4 +52,4 @@ class SignIn extends Component{
     }
 }
 
-export default withRouter(SignIn);
+export default SignIn;
