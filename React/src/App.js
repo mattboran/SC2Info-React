@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router';
-import {bindActionCreators} from 'redux';
+import { withRouter } from 'react-router';
+import { bindActionCreators } from 'redux';
 
 // Google MaterialUI Imports
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -21,7 +21,12 @@ import Header from './components/shared/Header';
 import * as ActionCreators from './actions';
 
 class App extends Component {
-
+  constructor(props){
+    super(props);
+    this.state = {
+      user: ''
+    }
+  }
     render(){
       const router = (
         <Switch>
@@ -34,12 +39,12 @@ class App extends Component {
       )
 
       return(
+        <MuiThemeProvider muiTheme={muiTheme}>
           <div>
-              <MuiThemeProvider muiTheme={muiTheme}>
               <Header {...this.props}/>
-              {router}
-              </MuiThemeProvider>
+              { router }
           </div>
+        </MuiThemeProvider>
         );
     }
 }

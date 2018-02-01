@@ -13,10 +13,11 @@ class RegisterView extends Component {
     }
 
     renderRegisterBox() {
-      console.log("Props recieved: "+JSON.stringify(this.props));
-      const { user, submitted, error } = this.props;
+
+      const { user, submitted } = this.props;
       const { handleChange, handleSubmit } = this.props.formActions;
       const { handleBackToLoginClick } = this.props.navActions;
+
       return(
         <div>
           <div style={styles.div}>

@@ -9,13 +9,18 @@ function registration(state = {}, action){
     case actionConstants.REGISTER_SUCCESS:
       return {};
     case actionConstants.REGISTER_FAILURE:
-      return {};
+      return { error: true };
     default:
       return state;
   }
 }
 
+function user(state = {}, action){
+  return state;
+}
+
 const rootReducer = combineReducers({
+  user,
   registration,
   routing: routerReducer
 });

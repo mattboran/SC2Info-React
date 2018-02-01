@@ -37,7 +37,7 @@ class News extends Component{
             );
         }
         // In the case of articles not being loaded
-        if (!this.state.newsItems || this.state.newsItems.length == 0){
+        if (!this.state.newsItems || this.state.newsItems.length === 0){
           return(
             <div>
                 <Title />
