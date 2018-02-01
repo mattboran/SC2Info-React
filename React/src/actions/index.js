@@ -10,11 +10,12 @@ export const userActions = {
 }
 
 
-function register(user) {
+export function register(user) {
+    console.log('we made it to register');
+
     return dispatch => {
         dispatch(request(user));
-
-        registerUser(user)
+        return registerUser(user)
             .then(
                 user => {
                     dispatch(success(user));
@@ -27,11 +28,11 @@ function register(user) {
                 }
             );
     };
-
-    function request(user, email, password) { return { type: actionConstants.REGISTER_REQUEST, user, email, password } }
-    function success(user) { return { type: actionConstants.REGISTER_SUCCESS, user } }
-    function failure(error) { return { type: actionConstants.REGISTER_FAILURE, error } }
 }
+
+function request(user) { return { type: actionConstants.REGISTER_REQUEST, payload: {user} } }
+function success(user) { return { type: actionConstants.REGISTER_SUCCESS, user } }
+function failure(error) { return { type: actionConstants.REGISTER_FAILURE, error } }
 // function login(username, password){
 //   return dispatch => {
 //     dispatch(request({ username }));

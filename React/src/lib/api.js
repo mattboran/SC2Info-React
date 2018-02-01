@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const apiCalls = {
-  fetchNews
+  fetchNews,
+  registerUser
 }
 
 const PROXY_INFO = {
@@ -20,9 +21,7 @@ export function fetchNews(){
   console.log("Making an api call to fetchNews.");
   return axios.get(url, AXIOS_CONFIG)
     .then(response => response.data)
-    .catch(error => {
-      console.log("Error in api call = "+error);
-    });
+    .catch(error => error.data);
 }
 
 export function registerUser(username, email, password) {
@@ -35,7 +34,7 @@ export function registerUser(username, email, password) {
       'password': password
     },
      AXIOS_CONFIG)
-    .then(response => response.data)
+    .then(response => {return (response.data)})
     .catch(error => {
       console.log("Error in register API call = "+error);
     })

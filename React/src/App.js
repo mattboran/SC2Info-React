@@ -13,7 +13,8 @@ import {grey900, grey700, grey500,grey200} from 'material-ui/styles/colors'
 
 // Pages in the app
 import SignIn from './components/SignIn';
-import Register from './components/Register';
+
+import RegisterContainer from './components/Register/RegisterContainer';
 import LadderInfo from './components/LadderInfo';
 import News from './components/News';
 import Header from './components/shared/Header';
@@ -27,7 +28,7 @@ class App extends Component {
           <Route exact path= "/News" component={News} />
           <Route exact path = "/LadderInfo" component= {LadderInfo} />
           <Route exact path = "/SignIn" component = {SignIn} />
-          <Route exact path = "/Register" component = {Register} />
+          <Route exact path = "/Register" component = { RegisterContainer } />
           <Redirect from="*" to="/News"/>
         </Switch>
       )

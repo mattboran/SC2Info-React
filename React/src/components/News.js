@@ -6,7 +6,7 @@ class News extends Component{
   constructor(props){
     super(props);
     this.state = {
-      loading: true,
+      loaded: false,
       newsItems: []
       }
     }
@@ -16,30 +16,41 @@ class News extends Component{
         this.setState({ newsItems });
       });
     }
+
     componentDidMount() {
         // Simulate async call
         setTimeout(() => {
-            this.setState({loading: false});
+            this.setState({loaded: true});
         },2000);
         this.getNewsItems();
     }
 
+
     render(){
-        if (this.state.loading) {
+        const Title = () =>  <h2>SC2 News / Homepage</h2>;
+
+        if (!this.state.loaded) {
             return(
                 <div>
-                    <Loader loaded = {!this.state.loading}/>
+                    <Loader loaded = {this.state.loaded}/>
                 </div>
             );
         }
+        // In the case of articles not being loaded
+        if (!this.state.newsItems || this.state.newsItems.length == 0){
+          return(
+            <div>
+                <Title />
+                <h3>Error: unable to get articles</h3>
+            </div>
+          );
+        }
+
         return(
             <div>
-                <div>
-                    <h2>SC2 News / Homepage</h2>
+                    <Title />
                     {this.state.newsItems.map(newsItem =>
-                        <div key={newsItem.id}>{newsItem.title}</div>
-                        )}
-                </div>
+                        <div key={newsItem.id}>{newsItem.title}</div> )}
             </div>
         );
     }
