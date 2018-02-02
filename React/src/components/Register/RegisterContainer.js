@@ -50,10 +50,7 @@ class RegisterContainer extends Component {
       const { dispatch } = this.props;
       // TODO: Password length check
       if (user.email && user.username && user.password){
-        //console.log("Trying to dispatch userActions.register");
-        console.log(userActions.testRegister(user));
-        dispatch(userActions.testRegister(user));
-        //dispatch(userActions.test(user));
+        dispatch(userActions.register(user));
       }
     }
 
