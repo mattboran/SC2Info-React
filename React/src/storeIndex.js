@@ -1,11 +1,9 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import thunk from 'redux-thunk';
-import loggerMiddleware from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 import rootReducer from './reducers';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const defaultState = {
   user: '',
@@ -14,15 +12,15 @@ const defaultState = {
 
 export const history = createHistory();
 
-const middleware = (
-  thunk,
-  loggerMiddleware,
-  routerMiddleware(history)
-)
+const loggerMiddleware = createLogger();
 
-export const store = createStore(
+ const store = createStore(
   rootReducer,
   defaultState,
-  composeEnhancers(applyMiddleware(middleware))
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware,
+    routerMiddleware(history)
+  )
 );
 export default store;

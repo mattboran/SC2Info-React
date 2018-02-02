@@ -48,9 +48,9 @@ class News extends Component{
 
         return(
             <div>
-                    <Title />
-                    {this.state.newsItems.map(newsItem =>
-                        <div key={newsItem.id}>{newsItem.title}</div> )}
+                <Title />
+                {this.state.newsItems.map(newsItem =>
+                    <div key={newsItem.id}>{newsItem.title}</div> )}
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { userActions } from '../../actions';
+import { userActions, testRegister } from '../../actions';
+
 import RegisterView from './RegisterView';
 import * as ActionCreators from '../../actions';
 
@@ -44,12 +44,16 @@ class RegisterContainer extends Component {
 
   handleSubmit(e){
       e.preventDefault();
+
       this.setState({ submitted : true });
       const { user } = this.state;
+      const { dispatch } = this.props;
       // TODO: Password length check
       if (user.email && user.username && user.password){
-        console.log("Doing the needful" + JSON.stringify(user));
-        userActions.register(user);
+        //console.log("Trying to dispatch userActions.register");
+        console.log(userActions.testRegister(user));
+        dispatch(userActions.testRegister(user));
+        //dispatch(userActions.test(user));
       }
     }
 
@@ -73,8 +77,11 @@ class RegisterContainer extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators(ActionCreators, dispatch);
+function mapStateToProps(state){
+  const { registering } = state.registration;
+  return {
+    registering
+  };
 }
 
-export default connect(mapDispatchToProps)(RegisterContainer);
+export default connect(mapStateToProps)(RegisterContainer);

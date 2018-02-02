@@ -1,38 +1,73 @@
-import * as actionConstants from './constants';
+import * as userConstants from './constants';
 import { history } from '../storeIndex';
-import { registerUser } from '../lib/api';
+import { registerUser, registerWithoutAxios } from '../lib/api';
+import axios from 'axios';
 
 export const userActions = {
   login:null,
   logout: null,
-  register,
+  // register,
+  testRegister
 //TODO: add
 }
 
-
-export function register(user) {
-    console.log('we made it to register');
-
-    return dispatch => {
-        dispatch(request(user));
-        return registerUser(user)
-            .then(
-                user => {
-                    dispatch(success(user));
-                    history.push('/SignIn');
-                    console.log("Registered!");
-                },
-                error => {
-                    dispatch(failure(error));
-                    console.log("Error, was "+error);
-                }
-            );
-    };
+const AXIOS_CONFIG = {
+  proxy: {
+    host: '127.0.0.1',
+    port: 3001
+  }
 }
 
-function request(user) { return { type: actionConstants.REGISTER_REQUEST, payload: {user} } }
-function success(user) { return { type: actionConstants.REGISTER_SUCCESS, user } }
-function failure(error) { return { type: actionConstants.REGISTER_FAILURE, error } }
+export function testRegister(user){
+
+  return dispatch =>{
+    dispatch(request(user));
+
+    registerWithoutAxios(user)
+      .then(
+        user => {
+          dispatch(success());
+          history.push('/login');
+          console.log("success register!");
+        },
+        error => {
+          dispatch(failure(error));
+          console.log("Fail register!");
+        }
+      );
+  };
+  function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
+  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+};
+
+// export function register(user) {
+//   console.log('we made it to register');
+//     return (dispatch) => {
+//       console.log("Dispatching!")
+//
+//       dispatch(request(user));
+//         return registerUser(user)
+//             .then(
+//                 user => {
+//                     dispatch(success(user));
+//                     history.push('/SignIn');
+//                     console.log("Registered!");
+//                 },
+//                 error => {
+//                     dispatch(failure(error));
+//                     console.log("Error, was "+error);
+//                 }
+//             );
+//     };
+//     function request(user) {
+//       //console.log("Dispatching a request of type REGISTER_REQUEST");
+//       return { type: actionConstants.REGISTER_REQUEST, user }
+//     }
+//     function success(user) { return { type: actionConstants.REGISTER_SUCCESS, payload: {user} } }
+//     function failure(error) { return { type: actionConstants.REGISTER_FAILURE, payload: {error} } }
+// }
+
 // function login(username, password){
 //   return dispatch => {
 //     dispatch(request({ username }));
