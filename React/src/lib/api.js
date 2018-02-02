@@ -9,17 +9,17 @@ export function fetchNews(){
     headers: { 'Content-Type': 'application/json' }
   };
 
-  return fetch('/news', requestOptions).then(handleResponse);
+  return fetch('/api/news', requestOptions).then(handleResponse);
 }
 
 export function registerUser(user) {
   const requestOptions = {
        method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
+       headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
        body: JSON.stringify(user)
    };
 
-   return fetch('/users/register', requestOptions).then(handleResponse);
+   return fetch('/api/users/register', requestOptions).then(handleResponse);
 }
 
 function handleResponse(response){

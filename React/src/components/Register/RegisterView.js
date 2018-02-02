@@ -4,6 +4,13 @@ import { Paper, TextField, RaisedButton, FlatButton } from 'material-ui';
 import styles from '../shared/FormStyles';
 
 class RegisterView extends Component {
+    constructor(props){
+      super(props);
+
+      this.state =  {
+        formError : this.props.formError
+      }
+    }
     renderRegistering() {
       return <div>Registering...</div>;
     }
@@ -14,9 +21,11 @@ class RegisterView extends Component {
 
     renderRegisterBox() {
 
-      const { user, submitted } = this.props;
+      const { user, submitted, formError } = this.props;
       const { handleChange, handleSubmit } = this.props.formActions;
       const { handleBackToLoginClick } = this.props.navActions;
+
+      // Determine whether we should enable button based on entries
 
       return(
         <div>
@@ -26,7 +35,8 @@ class RegisterView extends Component {
                     name = "email"
                     value = { user.email }
                     onChange = { handleChange }
-                    hintText= { submitted && !user.email ? "Email is required!" : "Email"}
+                    errorText = { submitted && formError.email !== '' ? formError.email : ''}
+                    hintText= "Email"
                     floatingLabelText="Email"
                     style={styles.textField}/>
 
@@ -34,7 +44,8 @@ class RegisterView extends Component {
                     name = "username"
                     value = { user.username }
                     onChange = { handleChange }
-                    hintText= { submitted && !user.username ? "Username is required!" : "Username"}
+                    errorText = { submitted && formError.username !== '' ? formError.username: ''}
+                    hintText= {  "Username"}
                     floatingLabelText="Username"
                     style={styles.textField}/>
 
@@ -43,7 +54,8 @@ class RegisterView extends Component {
                     value = { user.password }
                     type="password"
                     onChange = { handleChange }
-                    hintText= { submitted && !user.password ? "Password is required!" : "Password" }
+                    errorText = { submitted && formError.password !== '' ? formError.password: ''}
+                    hintText= { "Password" }
                     floatingLabelText="Password"
                     style={styles.textField}/>
                   {/*<TextField
