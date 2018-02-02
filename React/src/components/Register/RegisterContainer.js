@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { userActions, testRegister } from '../../actions';
+import { userActions } from '../../actions';
 
 import RegisterView from './RegisterView';
-import * as ActionCreators from '../../actions';
 
 class RegisterContainer extends Component {
   constructor(props){

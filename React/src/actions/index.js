@@ -17,7 +17,7 @@ export function register(user){
     registerUser(user)
       .then(
         user => {
-          dispatch(success());
+          dispatch(success(user));
           history.push('/login');
           console.log("success register!");
         },
