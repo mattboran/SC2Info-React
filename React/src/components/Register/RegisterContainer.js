@@ -71,7 +71,6 @@ class RegisterContainer extends Component {
       formError: error
     });
     return error;
-
   }
 
   handleSubmit(e){

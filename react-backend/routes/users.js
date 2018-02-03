@@ -30,19 +30,16 @@ router.post('/register', function(req, res, next){
 
   const { username, email, password } = req.body;
   let hash = bcrypt.hashSync(password, 15);
-  const insert = {
-    name: 'register-user',
-    text: 'INSERT INTO users(${this:name}) VALUES(${username}, ${email}, ${hash}) RETURNING id;',
-    values: [username, email, hash]
-  }
-  console.log('insert string: ',JSON.stringify(insert));
+  let timestamp = Number(new Date());
+  let date = new Date(timestamp);
   db.one({
-    text: 'INSERT INTO users(username, email, password) VALUES($1, $2, $3) RETURNING id;',
-    values: [username, email, hash]
+    name: 'register-user',
+    text: 'INSERT INTO users(username, email, password, register_date) VALUES($1, $2, $3, $4) RETURNING id;',
+    values: [username, email, hash, date]
   })
     .then(resp => {
       console.log('returning: ', resp.id);
-      res.sendStatus(200);
+      res.json(resp.id);
     })
     .catch(error => {
       console.log('error: ', error);
