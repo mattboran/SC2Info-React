@@ -73,34 +73,20 @@ class RegisterContainer extends Component {
     return error;
 
   }
-  // validate(user){
-  //     const { email, username, password } = user
-  //     return {
-  //       email: email.length === 0,
-  //       username: username.length === 0,
-  //       password: password.length === 0,
-  //     };
-  // }
-
 
   handleSubmit(e){
       e.preventDefault();
 
-      const { user } = this.state
+      const { user } = this.state;
       const { dispatch } = this.props;
 
       const error = this.validateForm(user);
       this.setState({ submitted : true });
       const submissionOK = !Object.keys(error).some(x =>error[x]);
 
-      if (submissionOK){
-        console.log("Submission OK!");
+      if (submissionOK) {
         dispatch(userActions.register(user));
-
-      }else{
-        console.log("Submission not OK!");
       }
-
     }
 
   render() {

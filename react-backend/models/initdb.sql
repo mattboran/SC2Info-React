@@ -5,6 +5,7 @@ CREATE TABLE Users(
 	Password 	VARCHAR(255) NOT NULL DEFAULT '',
 	BattlenetId VARCHAR(50),
 	AvatarLink 	VARCHAR(255),
+	date_registered date,
 	CONSTRAINT uniquename UNIQUE(UserName),
 	CONSTRAINT uniqueemail UNIQUE(Email)
 );
