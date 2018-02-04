@@ -2,10 +2,38 @@ import React, {Component} from 'react';
 import {Link, matchPath} from 'react-router-dom';
 import {AppBar, ToolbarGroup, Tabs, Tab,
     FontIcon, IconButton, FlatButton} from 'material-ui';
+import { IconMenu, MenuItem } from 'material-ui';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import { userActions } from '../../actions/';
+import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 import Image from './Image';
 
+
+const Logged = (props) => (
+  <IconMenu
+    {...props}
+
+    iconButtonElement={
+      <IconButton  ><MoreVertIcon color={'white'} hoverColor={'gray'}/></IconButton>
+    }
+    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+    >
+    <MenuItem primaryText="Sign out" onClick = {props.onLogoutClick}/>
+    <MenuItem primaryText="Options" containerElement= {<Link to="/UserOptions" />}/>
+  </IconMenu>
+);
+
+Logged.muiName = 'IconMenu';
+
+const LoginButton = (props) => (
+  <FlatButton label="Sign In or Register"
+              primary={true}
+              labelStyle={{color:'white', fontWeight:550}}
+              containerElement={<Link to="/SignIn"/>}/>
+          );
 class NavBar extends Component{
     constructor(props){
         super(props);
@@ -54,6 +82,12 @@ class NavLinks extends  Component{
         const tabId = 'navTabId';
         const {location} = this.props;
         const getTabValue = mountTabValueFactory(location, tabId);
+        var loginButton = <LoginButton />;
+        if (this.props.auth ){
+          if (this.props.auth.user !== ""){
+            loginButton = <Logged {...this.props}/>
+          }
+        }
         return(
             <ToolbarGroup>
                 <StyledTabs value={tabId}>
@@ -69,10 +103,7 @@ class NavLinks extends  Component{
                         value={getTabValue('/PlayerRank')}
                         label="Player Rank" />
                 </StyledTabs>
-                <FlatButton label="Sign In or Register"
-                            primary={true}
-                            labelStyle={{color:'white', fontWeight:550}}
-                            containerElement={<Link to="/SignIn"/>}/>
+                {loginButton}
             </ToolbarGroup>
         )
     }
@@ -84,7 +115,6 @@ class Header extends Component{
         return(
             <StyledAppBar title=""
                 iconElementLeft = {
-                    // TODO: Wrap this Image in ImageLink
                     <a href={battleNetLink}>
                     <Image source={sc2logo} width={150} height={50} mode='fit'/>
                     </a>
@@ -118,4 +148,14 @@ const IconButtonProps = {
     tooltipPosition: 'bottom-left',
 };
 
-export default (Header);
+function mapStateToProps(state){
+  return state;
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    onLogoutClick: () => dispatch(userActions.logout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

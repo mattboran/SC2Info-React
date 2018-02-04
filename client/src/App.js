@@ -25,7 +25,7 @@ class App extends Component {
       const router = (
         <Switch>
           <Route exact path= "/News" component={News} />
-          <Route exact path = "/LadderInfo" component= {LadderInfo}/>
+          <Route exact path = "/LadderInfo" component= { LadderInfo }/>
           <Route exact path = "/SignIn" component = { SignInContainer }  {...this.props}/>
           <Route exact path = "/Register" component = { RegisterContainer }  {...this.props}/>
           <Redirect from="*" to="/News"/>

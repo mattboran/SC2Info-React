@@ -7,10 +7,8 @@ export default function login(state = {}, action) {
         ...state,
         loggingIn: true,
         loginError: false,
-        auth: action.payload
       };
     case userConstants.LOGIN_SUCCESS:
-    console.log('Success payload: ', JSON.stringify(action.payload));
       return {
         ...state,
         loggingIn: false,
