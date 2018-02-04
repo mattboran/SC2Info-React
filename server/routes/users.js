@@ -29,15 +29,16 @@ router.get('/secret', function(req,res,next){
 router.post('/register', function(req, res, next){
 
   const { username, email, password } = req.body;
-  let hash = bcrypt.hash(password, 10);
   let timestamp = Number(new Date());
   let date = new Date(timestamp);
-  db.one({
-    name: 'register-user',
-    text: 'INSERT INTO users(username, email, password, register_date) VALUES($1, $2, $3, $4) RETURNING id;',
-    values: [username, email, hash, date]
-  })
+  let hash = bcrypt.hash(password, 10, function(err, hash){
+    db.one({
+      name: 'register-user',
+      text: 'INSERT INTO users(username, email, password, register_date) VALUES($1, $2, $3, $4) RETURNING id;',
+      values: [username, email, hash, date]
+    })
     .then(resp => {
+      // TODO: return nothing
       res.json(resp.id);
     })
     .catch(error => {
@@ -47,10 +48,41 @@ router.post('/register', function(req, res, next){
         console.log("Some other error!");
       }
     });
+  });
 });
 
 router.post('/signin', function(req,res,next){
-  const { username, email, password } = req.body;
-  // let hash =
+  const { username, password } = req.body;
+  db.one({
+    name: 'fetch-user',
+    text: 'SELECT * from users WHERE username = $1; ',
+    values: [username]
+  })
+    .then(resp => {
+      const hashPassword = resp.password;
+      console.log("Req pw got: ", password);
+      console.log("Resp got: ", JSON.stringify(resp));
+      bcrypt.compare(password, hashPassword, function(err, re){
+        if (re){
+          const user = {
+            ...resp,
+            password: 'hidden-password'
+          }
+          res.json(user);
+        }
+        else {
+          res.status(403).json('invalidpassword');
+        }
+      });
+    })
+    .catch(error => {
+      if (error.name === 'QueryResultError'){
+        res.status(403).json('invalidusername');
+      }
+      else{
+        console.log("Some other error!");
+        res.status(403).json('othererror');
+      }
+    });
 });
 module.exports = router;

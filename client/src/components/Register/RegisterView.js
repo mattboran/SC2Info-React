@@ -30,7 +30,29 @@ class RegisterView extends Component {
         </div>
       );
     }
+    checkForEntryErrors(user){
 
+      const { email, username, password } = user;
+      const regex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+
+      let error = {
+        email: regex.test(email) ? '' : 'Invalid format for email!',
+        username: '',
+        password: ''
+      };
+      if (username.length < 3){
+          error.username = 'Username too short!';
+      } else if (username.length > 20){
+          error.username = 'Username too long!';
+      }
+      if (password.length < 5){
+          error.password = 'Password too short!';
+      }else if (password.length > 30){
+          error.password = 'Password too long!';
+      }
+
+      return error;
+    }
     updateViewForServerErrors(formError){
       const { error } = this.props.registerError;
       let finalError = {
@@ -54,7 +76,9 @@ class RegisterView extends Component {
 
       var finalError = formError;
       if (submitted){
-        if (user.email.length > 0 && user.password.length > 0 && user.username.length > 0){
+        const err = this.checkForEntryErrors(user);
+        const submissionOK = !Object.keys(err).some(x =>err[x]);
+        if (submissionOK){
           finalError = this.updateViewForServerErrors(formError);
         }
       }

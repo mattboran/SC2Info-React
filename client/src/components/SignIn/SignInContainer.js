@@ -54,16 +54,16 @@ class SignInContainer extends Component {
     handleSubmit(e){
         e.preventDefault();
 
-        // const { user } = this.state;
-        // const { dispatch } = this.props;
+        const { user } = this.state;
+        const { dispatch } = this.props;
         //
-        // const error = this.validateForm(user);
-        // this.setState({ submitted : true });
-        // const submissionOK = !Object.keys(error).some(x =>error[x]);
+        const error = this.validateForm(user);
+        this.setState({ submitted : true });
+        const submissionOK = !Object.keys(error).some(x =>error[x]);
         //
-        // if (submissionOK) {
-        //   dispatch(userActions.register(user));
-        // }
+        if (submissionOK) {
+           dispatch(userActions.login(user));
+        }
       }
 
     render() {
@@ -80,8 +80,8 @@ class SignInContainer extends Component {
 
       const pass = {
         ...this.state,
-        loggingIn,
         loginError,
+        loggingIn,
         formActions,
         navActions
       }
@@ -94,7 +94,7 @@ class SignInContainer extends Component {
     const { loggingIn, loginError } = state.login;
     return {
       loggingIn,
-      loginError
+      loginError,
     };
   }
 

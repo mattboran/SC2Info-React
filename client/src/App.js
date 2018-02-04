@@ -21,19 +21,13 @@ import Header from './components/shared/Header';
 import * as ActionCreators from './actions';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      user: ''
-    }
-  }
     render(){
       const router = (
         <Switch>
           <Route exact path= "/News" component={News} />
-          <Route exact path = "/LadderInfo" component= {LadderInfo} />
-          <Route exact path = "/SignIn" component = { SignInContainer } />
-          <Route exact path = "/Register" component = { RegisterContainer } />
+          <Route exact path = "/LadderInfo" component= {LadderInfo}/>
+          <Route exact path = "/SignIn" component = { SignInContainer }  {...this.props}/>
+          <Route exact path = "/Register" component = { RegisterContainer }  {...this.props}/>
           <Redirect from="*" to="/News"/>
         </Switch>
       )
@@ -59,8 +53,9 @@ const muiTheme = getMuiTheme({
 });
 
 function mapStateToProps(state){
+  const { auth } = state.login;
   return {
-    user: state.user,
+    auth,
     routing: state.router
   }
 }

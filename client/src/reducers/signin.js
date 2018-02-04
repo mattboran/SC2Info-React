@@ -6,20 +6,29 @@ export default function login(state = {}, action) {
       return{
         ...state,
         loggingIn: true,
-        loginError: false
+        loginError: false,
+        auth: action.payload
       };
     case userConstants.LOGIN_SUCCESS:
+    console.log('Success payload: ', JSON.stringify(action.payload));
       return {
         ...state,
         loggingIn: false,
-        loginError: false
+        loginError: false,
+        auth: action.payload
       };
     case userConstants.LOGIN_FAILURE:
-      console.log("Action we got for login failure was ", JSON.stringify(action));
       return {
         ...state,
         loggingIn: false,
         loginError: action.payload
+      };
+    case userConstants.LOGOUT:
+      console.log("Logging out");
+      return {
+        auth:{
+          user: ''
+        }
       };
     default:
       return state;

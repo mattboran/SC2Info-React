@@ -31,14 +31,12 @@ class SignInView extends Component{
     );
   }
   updateViewForServerErrors(formError){
-    const { error } = this.props.signInError;
+    const { error } = this.props.loginError;
     let finalError = {
       ...formError
     };
-    if ( error === 'uniqueemail'){
-        finalError.email = 'Email is already in use!';
-    } else if (error === 'uniquename'){
-        finalError.username = 'Username is already in use!';
+    if ( error === 'invalidpassword' || error === 'invalidusername'){
+        finalError.password = 'Username/Password combo invalid!';
     }
     return finalError;
   }

@@ -4,7 +4,7 @@ import { registerUser, loginUser } from '../lib/api';
 
 export const userActions = {
   login,
-  logout: null,
+  logout,
   register
 //TODO: add
 }
@@ -48,4 +48,10 @@ export function login(user){
   function request(user) { return { type: userConstants.LOGIN_REQUEST, payload: { user } } }
   function success(user) { return { type: userConstants.LOGIN_SUCCESS, payload: { user } } }
   function failure(error) { return { type: userConstants.LOGIN_FAILURE, payload: { error } } }
+}
+
+export function logout(){
+  return dispatch => {
+    dispatch({ type: userConstants.LOGOUT });
+  };
 }

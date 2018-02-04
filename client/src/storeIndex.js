@@ -7,7 +7,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers';
 
 const defaultState = {
-  user: '',
+  auth: {
+    user: ''
+  },
   routing: routerMiddleware
 }
 
