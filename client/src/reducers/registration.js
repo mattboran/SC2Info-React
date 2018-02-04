@@ -17,7 +17,6 @@ export default function registration(state={}, action){
           registerError: false
         };
     case userConstants.REGISTER_FAILURE:
-      console.log("The action we got was ", JSON.stringify(action));
       return {
           ...state,
           registering: false,

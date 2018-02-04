@@ -95,14 +95,16 @@ class RegisterContainer extends Component {
     }
 
     const formActions = {
-      validateServerError: this.validateServerError,
       handleChange: this.handleChange,
       handleSubmit: this.handleSubmit
     }
 
+    const { registerError, registering } = this.props;
+
     const pass = {
       ...this.state,
-      registerError: this.props,
+      registerError,
+      registering,
       formActions,
       navActions
     }

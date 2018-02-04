@@ -29,7 +29,7 @@ router.get('/secret', function(req,res,next){
 router.post('/register', function(req, res, next){
 
   const { username, email, password } = req.body;
-  let hash = bcrypt.hashSync(password, 15);
+  let hash = bcrypt.hash(password, 10);
   let timestamp = Number(new Date());
   let date = new Date(timestamp);
   db.one({
@@ -42,12 +42,15 @@ router.post('/register', function(req, res, next){
     })
     .catch(error => {
       if (error.code == 23505){
-
         res.status(403).json(error.constraint);
       }else{
         console.log("Some other error!");
       }
     });
+});
 
+router.post('/signin', function(req,res,next){
+  const { username, email, password } = req.body;
+  // let hash =
 });
 module.exports = router;

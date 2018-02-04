@@ -13,13 +13,21 @@ export function fetchNews(){
 }
 
 export function registerUser(user) {
-  console.log("User in registerUser: ", JSON.stringify(user));
   const requestOptions = {
        method: 'POST',
        headers: { 'Content-Type' : 'application/json' } ,
        body: JSON.stringify(user)
    };
    return fetch('/api/users/register', requestOptions).then(handleResponse);
+}
+
+export function loginUser(user){
+  const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type' : 'application/json' },
+      body: JSON.stringify(user)
+  };
+  return fetch('/api/users/signin', requestOptions).then(handleResponse);
 }
 
 function handleResponse(response){

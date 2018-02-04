@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Paper, TextField, RaisedButton, FlatButton } from 'material-ui';
-
+import Loader from 'react-loader';
 import styles from '../shared/FormStyles';
 
 class RegisterView extends Component {
@@ -8,28 +8,42 @@ class RegisterView extends Component {
       super(props);
       this.updateViewForServerErrors = this.updateViewForServerErrors.bind(this);
     }
+
     renderRegistering() {
-      return <div>Registering...</div>;
+      return (
+        <div style={styles.div}>
+          <Paper style={styles.paper} zDepth={3}>
+            <Loader loaded = {!this.props.registering}
+              options = {styles.loaderOptions}
+              className = "spinner"/ >
+          </Paper>
+        </div>
+      );
     }
 
     renderError() {
-      return <div>There was an error registering!</div>;
+      return(
+          <div style={styles.div}>
+            <Paper style={styles.paper} zDepth={3}>
+              <div> There was an unhandled error!</div>
+          </Paper>
+        </div>
+      );
     }
 
     updateViewForServerErrors(formError){
-      const { registerError } = this.props.registerError;
+      const { error } = this.props.registerError;
       let finalError = {
         ...formError
-      }
-      if ( registerError ){
-        if ( registerError.error === 'uniqueemail'){
-            finalError.email = 'Email is already in use!';
-        } else if (registerError.error === 'uniquename'){
-            finalError.username = 'Username is already in use!';
-        }
+      };
+      if ( error === 'uniqueemail'){
+          finalError.email = 'Email is already in use!';
+      } else if (error === 'uniquename'){
+          finalError.username = 'Username is already in use!';
       }
       return finalError;
     }
+
     renderRegisterBox() {
 
       const { user, submitted, formError } = this.props;
@@ -37,9 +51,12 @@ class RegisterView extends Component {
       const { handleBackToLoginClick } = this.props.navActions;
 
       // This is the error that comes back from the server via DB
+
       var finalError = formError;
       if (submitted){
-        finalError = this.updateViewForServerErrors();
+        if (user.email.length > 0 && user.password.length > 0 && user.username.length > 0){
+          finalError = this.updateViewForServerErrors(formError);
+        }
       }
       // Determine whether we should enable button based on entries
 
