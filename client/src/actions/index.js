@@ -18,7 +18,7 @@ export function register(user){
       .then(
         user => {
           dispatch(success(user));
-          history.push('/login');
+          history.push('/SignIn');
           console.log("success register!");
         },
         error => {
@@ -27,7 +27,7 @@ export function register(user){
         }
       );
   };
-  function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+  function request(user) { return { type: userConstants.REGISTER_REQUEST, payload: {user} } }
+  function success(user) { return { type: userConstants.REGISTER_SUCCESS, payload: {user} } }
+  function failure(error) { return { type: userConstants.REGISTER_FAILURE, payload: {error} } }
 };

@@ -38,14 +38,16 @@ router.post('/register', function(req, res, next){
     values: [username, email, hash, date]
   })
     .then(resp => {
-      console.log('returning: ', resp.id);
       res.json(resp.id);
     })
     .catch(error => {
-      console.log('error: ', error);
-      res.sendStatus(500);
+      if (error.code == 23505){
+
+        res.status(403).json(error.constraint);
+      }else{
+        console.log("Some other error!");
+      }
     });
 
-  console.log("Username: ", username);
 });
 module.exports = router;

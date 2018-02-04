@@ -19,10 +19,11 @@ require('dotenv').load();
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3443');
 // app.set('port', port);
 
 var httpsPort = '3443';
+port = httpsPort;
 console.log('Server port is: ', httpsPort);
 app.set('port', httpsPort)
 /**

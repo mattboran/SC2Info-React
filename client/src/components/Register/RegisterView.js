@@ -6,10 +6,7 @@ import styles from '../shared/FormStyles';
 class RegisterView extends Component {
     constructor(props){
       super(props);
-
-      this.state =  {
-        formError : this.props.formError
-      }
+      this.updateViewForServerErrors = this.updateViewForServerErrors.bind(this);
     }
     renderRegistering() {
       return <div>Registering...</div>;
@@ -18,13 +15,32 @@ class RegisterView extends Component {
     renderError() {
       return <div>There was an error registering!</div>;
     }
-
+    updateViewForServerErrors(formError){
+      const { registerError } = this.props.registerError;
+      let finalError = {
+        ...formError
+      }
+      if ( registerError ){
+        if ( registerError.error === 'uniqueemail'){
+            finalError.email = 'Email is already in use!';
+        } else if (registerError.error === 'uniquename'){
+            finalError.username = 'Username is already in use!';
+        }
+      }
+      return finalError;
+    }
     renderRegisterBox() {
 
       const { user, submitted, formError } = this.props;
       const { handleChange, handleSubmit } = this.props.formActions;
       const { handleBackToLoginClick } = this.props.navActions;
 
+      // This is the error that comes back from the server via DB
+      const { registerError } = this.props.registerError;
+      var finalError = this.props.formError;
+      if (submitted){
+        finalError = this.updateViewForServerErrors();
+      }
       // Determine whether we should enable button based on entries
 
       return(
@@ -35,7 +51,7 @@ class RegisterView extends Component {
                     name = "email"
                     value = { user.email }
                     onChange = { handleChange }
-                    errorText = { submitted && formError.email !== '' ? formError.email : ''}
+                    errorText = { submitted && finalError.email !== '' ? finalError.email : ''}
                     hintText= "Email"
                     floatingLabelText="Email"
                     style={styles.textField}/>
@@ -44,7 +60,7 @@ class RegisterView extends Component {
                     name = "username"
                     value = { user.username }
                     onChange = { handleChange }
-                    errorText = { submitted && formError.username !== '' ? formError.username: ''}
+                    errorText = { submitted && finalError.username !== '' ? finalError.username: ''}
                     hintText= {  "Username"}
                     floatingLabelText="Username"
                     style={styles.textField}/>
@@ -54,7 +70,7 @@ class RegisterView extends Component {
                     value = { user.password }
                     type="password"
                     onChange = { handleChange }
-                    errorText = { submitted && formError.password !== '' ? formError.password: ''}
+                    errorText = { submitted && finalError.password !== '' ? finalError.password: ''}
                     hintText= { "Password" }
                     floatingLabelText="Password"
                     style={styles.textField}/>

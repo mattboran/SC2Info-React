@@ -16,7 +16,6 @@ class RegisterContainer extends Component {
           password:''
         },
         submitted: false,
-        error: false,
         formError: {
           email: '',
           username: '',
@@ -42,9 +41,11 @@ class RegisterContainer extends Component {
         user: {
           ...user,
             [name]: value
-          }
+          },
+        submitted: false
       });
   }
+
 
 
   validateForm(user){
@@ -94,12 +95,14 @@ class RegisterContainer extends Component {
     }
 
     const formActions = {
+      validateServerError: this.validateServerError,
       handleChange: this.handleChange,
       handleSubmit: this.handleSubmit
     }
 
     const pass = {
       ...this.state,
+      registerError: this.props,
       formActions,
       navActions
     }
@@ -109,9 +112,10 @@ class RegisterContainer extends Component {
 }
 
 function mapStateToProps(state){
-  const { registering } = state.registration;
+  const { registering, registerError } = state.registration;
   return {
-    registering
+    registering,
+    registerError
   };
 }
 

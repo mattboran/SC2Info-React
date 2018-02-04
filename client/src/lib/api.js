@@ -16,7 +16,6 @@ export function registerUser(user) {
   console.log("User in registerUser: ", JSON.stringify(user));
   const requestOptions = {
        method: 'POST',
-       //headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
        headers: { 'Content-Type' : 'application/json' } ,
        body: JSON.stringify(user)
    };
@@ -25,7 +24,7 @@ export function registerUser(user) {
 
 function handleResponse(response){
   if(!response.ok){
-    return Promise.reject(response.statusText);
+    return response.json().then(Promise.reject.bind(Promise));
   }
   return response.json();
 }
