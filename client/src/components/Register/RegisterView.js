@@ -15,6 +15,7 @@ class RegisterView extends Component {
     renderError() {
       return <div>There was an error registering!</div>;
     }
+
     updateViewForServerErrors(formError){
       const { registerError } = this.props.registerError;
       let finalError = {
@@ -36,8 +37,7 @@ class RegisterView extends Component {
       const { handleBackToLoginClick } = this.props.navActions;
 
       // This is the error that comes back from the server via DB
-      const { registerError } = this.props.registerError;
-      var finalError = this.props.formError;
+      var finalError = formError;
       if (submitted){
         finalError = this.updateViewForServerErrors();
       }
