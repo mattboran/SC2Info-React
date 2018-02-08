@@ -60,8 +60,6 @@ router.post('/signin', function(req,res,next){
   })
     .then(resp => {
       const hashPassword = resp.password;
-      console.log("Req pw got: ", password);
-      console.log("Resp got: ", JSON.stringify(resp));
       bcrypt.compare(password, hashPassword, function(err, re){
         if (re){
           const user = {

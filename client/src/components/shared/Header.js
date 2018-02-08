@@ -7,22 +7,32 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { userActions } from '../../actions/';
 import { connect } from 'react-redux';
 
+import styles from './FormStyles';
 import styled from 'styled-components';
 import Image from './Image';
 
+const iconButtonColors = {
+  color: 'white',
+  hoverColor: 'gray',
+  backgroundColor: 'black',
+
+};
 
 const Logged = (props) => (
   <IconMenu
     {...props}
+    style={iconButtonColors}
 
     iconButtonElement={
-      <IconButton  ><MoreVertIcon color={'white'} hoverColor={'gray'}/></IconButton>
+      <IconButton  >
+        <MoreVertIcon color={iconButtonColors.color} hoverColor={iconButtonColors.hoverColor}/>
+      </IconButton>
     }
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
-    <MenuItem primaryText="Sign out" onClick = {props.onLogoutClick}/>
-    <MenuItem primaryText="Options" containerElement= {<Link to="/UserOptions" />}/>
+    <MenuItem primaryText="Sign out" onClick = {props.onLogoutClick} style={iconButtonColors}/>
+    <MenuItem primaryText="Options" containerElement= {<Link to="/UserOptions" />} style={iconButtonColors}/>
   </IconMenu>
 );
 
@@ -31,7 +41,7 @@ Logged.muiName = 'IconMenu';
 const LoginButton = (props) => (
   <FlatButton label="Sign In or Register"
               primary={true}
-              labelStyle={{color:'white', fontWeight:550}}
+              labelStyle={styles.loginButtonLabel}
               containerElement={<Link to="/SignIn"/>}/>
           );
 class NavBar extends Component{
@@ -46,12 +56,8 @@ class NavBar extends Component{
 
     render(){
 
-        const iconColor = 'white';
-        const hoverIconColor = 'gray';
-
         const typeOfNavbar = (location) => (route) => !!matchPath(location.pathname, { path: route, exact: true }) ? false : true;
-
-        const {location} = this.props;
+        const { location } = this.props;
         const matchNavbarType = typeOfNavbar(location);
 
         if (matchNavbarType('/SignIn') && matchNavbarType('/Register')){
@@ -63,8 +69,8 @@ class NavBar extends Component{
             <IconButton
                  props={IconButtonProps}
                  onClick={this.goBack}>
-                 <FontIcon color={iconColor}
-                    hoverColor={hoverIconColor}
+                 <FontIcon color={iconButtonColors.color}
+                    hoverColor={iconButtonColors.hoverColor}
                     className="material-icons">
                         clear
                     </FontIcon>

@@ -37,9 +37,15 @@ const button = {
         marginBottom: 10
     }
 
+const loginButtonLabel = {
+      color: 'white',
+      fontWeight: 550
+}
+
 const styles = {
     div,
     paper,
+    loginButtonLabel,
     textField,
     loginField,
     loaderOptions,
