@@ -63,8 +63,7 @@ router.post('/signin', function(req,res,next){
       bcrypt.compare(password, hashPassword, function(err, re){
         if (re){
           const user = {
-            ...resp,
-            password: 'hidden-password'
+            ...resp
           }
           res.json(user);
         }

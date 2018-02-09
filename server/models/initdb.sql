@@ -9,3 +9,8 @@ CREATE TABLE Users(
 	CONSTRAINT uniquename UNIQUE(UserName),
 	CONSTRAINT uniqueemail UNIQUE(Email)
 );
+
+CREATE TABLE PlayerStats(
+	user_id 	serial NOT NULL,
+	data jsonb
+);
