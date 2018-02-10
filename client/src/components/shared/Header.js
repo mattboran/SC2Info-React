@@ -19,7 +19,6 @@ const iconButtonColors = {
 
 const Logged = (props) => (
   <IconMenu
-    {...props}
     style={iconButtonColors}
 
     iconButtonElement={

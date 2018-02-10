@@ -6,7 +6,9 @@ const apiCalls = {
 export function fetchNews(){
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
+    mode: 'same-origin',
+    credentials: 'include'
   };
 
   return fetch('/api/news', requestOptions).then(handleResponse);

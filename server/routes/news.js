@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../static/database.js').db;
-/* GET users listing. */
+
 router.get('/', function(req, res, next) {
-  // res.send('respond with a resource');
+  console.log("Current session ID: ",(req.sessionID));
+  console.log("Username: ",(req.session.username));
+  console.log("Token: ", req.session.token);
+  console.log("Current session: ", req.session);
+
   res.json([{
     id: 1,
     title: "Title 1"
