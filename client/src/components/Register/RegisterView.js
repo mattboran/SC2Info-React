@@ -115,14 +115,6 @@ class RegisterView extends Component {
                     hintText= { "Password" }
                     floatingLabelText="Password"
                     style={styles.textField}/>
-                  {/*<TextField
-                    type="password"
-                    hintText="Confirm your password"
-                    floatingLabelText="Password"
-                    onChange = {(even, newValue)=>
-                        this.setState({confirmPassword:newValue})}
-                    style={styles.textField}/>*/}
-
                 <RaisedButton label="Register"
                     primary={true}
                     style={styles.button}

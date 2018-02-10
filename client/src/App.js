@@ -12,9 +12,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {grey900, grey700, grey500,grey200} from 'material-ui/styles/colors'
 
 // Pages in the app
-import SignInContainer from './components/SignIn/SignInContainer';
-
-import RegisterContainer from './components/Register/RegisterContainer';
+import { SignIn } from './components/SignIn';
+import { Register } from './components/Register';
 import LadderInfo from './components/LadderInfo';
 import News from './components/News';
 import Header from './components/shared/Header';
@@ -26,8 +25,8 @@ class App extends Component {
         <Switch>
           <Route exact path= "/News" component={News} />
           <Route exact path = "/LadderInfo" component= { LadderInfo }/>
-          <Route exact path = "/SignIn" component = { SignInContainer }  {...this.props}/>
-          <Route exact path = "/Register" component = { RegisterContainer }  {...this.props}/>
+          <Route exact path = "/SignIn" component = { SignIn }  {...this.props}/>
+          <Route exact path = "/Register" component = { Register }  {...this.props}/>
           <Redirect from="*" to="/News"/>
         </Switch>
       )
