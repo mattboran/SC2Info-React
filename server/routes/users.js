@@ -8,16 +8,7 @@ const bcrypt = require('bcrypt');
 
 const cert = fs.readFileSync('./bin/ca/private.key', 'utf8');
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json([{
-    id: 1,
-    username: "thatdude33"
-  },
-  {
-    id: 2,
-    username: "ThatDude33"
-  }])
-});
+
 
 router.get('/secret', function(req,res,next){
 
@@ -55,30 +46,30 @@ router.post('/register', function(req, res, next){
 });
 
 //First invalidate the existing session
-router.post('/signin', function(req,res,next){
-
-  // If a user already has an auth token, there's some problem.
-  // TODO: handle this appropriately besides from client side.
-  if (req.session.token){
-    console.log("A logged in user is trying to re-log.");
-  }
-
-  req.session.loggingIn = true;
-  req.session.user = req.body.username;
-  req.session.save(function(){
-    return req.session.destroy( function(err){
-      if(err){
-        console.log("There was an error: ", err);
-      }else{
-        console.log("Existing session destroyed: ID ",req.sessionID);
-      }
-      res.clearCookie('connect.sid');
-      return next();
-    });
-  });
+// router.post('/signin', function(req,res,next){
+//
+//   // If a user already has an auth token, there's some problem.
+//   // TODO: handle this appropriately besides from client side.
+//   if (req.session.token){
+//     console.log("A logged in user is trying to re-log.");
+//   }
+//
+//   req.session.loggingIn = true;
+//   req.session.user = req.body.username;
+//   req.session.save(function(){
+//     return req.session.destroy( function(err){
+//       if(err){
+//         console.log("There was an error: ", err);
+//       }else{
+//         console.log("Existing session destroyed: ID ",req.sessionID);
+//       }
+//       res.clearCookie('connect.sid');
+//       return next();
+//     });
+//   });
 
   // Save some notion that the user didn't dissapear, but instead logged in
-});
+// });
 
 // Query the DB on user signin
 router.post('/signin', function(req,res,next){
