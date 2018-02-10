@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // var session = require('express-session');
-var sess = require('./session');
+var sess = require('./utils/session');
 const fs = require('fs');
 // const db = require('./static/database').db;
 // const pgSession = require('connect-pg-simple')(session);
@@ -28,10 +28,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'static')));
+// app.use(express.static(path.join(__dirname, 'static')));
 
 // secret key for signing session, JWT
-const secret = fs.readFileSync(path.join(__dirname, 'bin', 'ca', 'private.key'), 'utf8');
+const secret = fs.readFileSync(path.join(__dirname, 'utils', 'ca', 'private.key'), 'utf8');
 // Sessions
 app.use(cookieParser(secret));
 app.use(sess(app.get('env') !== 'development' || app.get('port') === 443 ));

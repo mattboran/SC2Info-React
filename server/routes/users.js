@@ -3,10 +3,10 @@ var router = express.Router();
 const fs = require('fs');
 
 const jwt = require('jsonwebtoken');
-const db = require('../static/database').db;
+const db = require('../utils/database').db;
 const bcrypt = require('bcrypt');
 
-const cert = fs.readFileSync('./bin/ca/private.key', 'utf8');
+const cert = fs.readFileSync('./utils/ca/private.key', 'utf8');
 /* GET users listing. */
 
 

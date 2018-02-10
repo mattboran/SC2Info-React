@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../static/database.js').db;
+var db = require('../utils/database.js').db;
 
 router.get('/', function(req, res, next) {
   console.log("Current session ID: ",(req.sessionID));

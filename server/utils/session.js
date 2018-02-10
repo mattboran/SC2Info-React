@@ -2,10 +2,10 @@ const session = require('express-session');
 const fs = require('fs');
 const path = require('path');
 
-const db = require('./static/database').db;
+const db = require('./database').db;
 const pgSession = require('connect-pg-simple')(session);
 
-const secret = fs.readFileSync(path.join(__dirname, 'bin', 'ca', 'private.key'), 'utf8');
+const secret = fs.readFileSync(path.join(__dirname, 'ca', 'private.key'), 'utf8');
 const sess = (secure) => session({
   store: new pgSession({pgPromise: db}),
   secret: secret,

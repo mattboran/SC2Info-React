@@ -9,8 +9,8 @@ var debug = require('debug')('react-backend:server');
 var http = require('http');
 var fs = require('fs');
 var https = require('https');
-const privateKey = fs.readFileSync('./bin/ca/private.key', 'utf8');
-const certificate = fs.readFileSync('./bin/ca/localhost.crt', 'utf8');
+const privateKey = fs.readFileSync('./utils/ca/private.key', 'utf8');
+const certificate = fs.readFileSync('./utils/ca/localhost.crt', 'utf8');
 
 var credentials = { key: privateKey, cert: certificate };
 require('dotenv').load();

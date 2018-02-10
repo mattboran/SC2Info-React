@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require( '../static/database').db;
+var db = require( '../utils/database').db;
 
 router.get('/', function(req, res, next) {
 
