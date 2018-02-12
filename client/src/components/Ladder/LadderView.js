@@ -5,5 +5,7 @@ class LadderView extends Component {
     super(props);
   }
 
-  renderDefaultLadder
+  renderDefaultLadder(){
+    return;
+  }
 }

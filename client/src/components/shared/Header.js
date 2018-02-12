@@ -101,14 +101,15 @@ class NavLinks extends  Component{
                         style = {TabStyle}
                         containerElement={<Link to="/News"/>}/>
                       <Tab
-                        value={getTabValue('/LadderInfo')}
+                        value={getTabValue('/Ladders')}
                         label='Ladder'
                         style = {TabStyle}
-                        containerElement={<Link to="/LadderInfo"/>}/>
+                        containerElement={<Link to="/Ladders"/>}/>
                       <Tab
-                        value={getTabValue('/PlayerRank')}
+                        value={getTabValue('/Players')}
                         label='Players'
-                        style = {TabStyle} />
+                        style = {TabStyle}
+                        containerElement = {<Link to="/Players"/>}/>
                     </Tabs>
                 {loginButton}
             </ToolbarGroup>

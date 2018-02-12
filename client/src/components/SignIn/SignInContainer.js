@@ -47,7 +47,12 @@ class SignInContainer extends Component {
         username: username.length !== 0 ? '' : 'Enter a username!',
         password: password.length !== 0 ? '' : 'Enter a password!'
       };
-
+      this.setState({
+        formError:{
+          ...error
+        }
+      });
+      
       return error;
     }
 

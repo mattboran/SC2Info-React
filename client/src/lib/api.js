@@ -34,7 +34,7 @@ export function loginUser(user){
 
 function handleResponse(response){
   if(!response.ok){
-    return response.json().then(Promise.reject.bind(Promise));
+    return response.json({err:'err'}).then(Promise.reject.bind(Promise));
   }
   return response.json();
 }

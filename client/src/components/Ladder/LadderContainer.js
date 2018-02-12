@@ -3,13 +3,7 @@ import LadderView from './LadderView';
 class LadderContainer extends Component{
     constructor(props){
       super(props);
-      this.state = {
-        searching: false,
-        search: {
-          region : 'NA',
-          playerName : '',
-        }
-      }
+      
     }
     render(){
         return(
