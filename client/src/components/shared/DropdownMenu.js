@@ -1,10 +1,11 @@
-import React from 'react';
-import Button from 'material-ui/Button';
+import React, {Component} from 'react';
+import FlatButton from 'material-ui/FlatButton';
 import Menu, { MenuItem } from 'material-ui/Menu';
 
-class DropdownMenu extends React.Component {
+class DropdownMenu extends Component {
   constructor(props){
-
+    super(props);
+    console.log(props.children);
   }
 
   state = {
@@ -14,12 +15,13 @@ class DropdownMenu extends React.Component {
 
   handleClick = event => {
     this.setState({
-       anchorEl: event.currentTarget 
+       anchorEl: event.currentTarget
      });
   };
 
   clickedOnMenuItem(label){
     this.setState({anchorEl: null, selectedRegion: label});
+    this.handleClose();
   }
 
   handleClose = () => {
@@ -31,27 +33,33 @@ class DropdownMenu extends React.Component {
 
     return (
       <div>
-        <Button
+        <FlatButton
           aria-owns={anchorEl ? 'simple-menu' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
+          style={{marginTop: 5}}
         >
-          Open Menu
-        </Button>
+          Region
+        </FlatButton>
         <Menu
           id={this.props.id}
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          {this.props.children.map(menuItem => {
-            return <MenuItem onClick = {this.handleClose}
-          })}
-          <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-          <MenuItem onClick={this.handleClose}>My account</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-        </Menu>
-      </div>
+        {this.props.children}
+      </Menu>
+    </div>
+        // {  // {this.props.children.map(menuItem => {
+        //   //   console.log("Menu Item: ", menuItem);
+        //   //   return <MenuItem onClick = {
+        //   //       this.clickedOnMenuItem.bind(this, menuItem.props.label)
+        //   //     }/>
+        //   // })}
+        //   // <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+        //   // <MenuItem onClick={this.handleClose}>My account</MenuItem>
+        //   // <MenuItem onClick={this.handleClose}>Logout</MenuItem>}
+        // // </Menu>
     );
   }
 }
