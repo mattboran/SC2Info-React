@@ -5,17 +5,19 @@ import MenuItem from 'material-ui/MenuItem';
 class DropdownMenu extends Component {
   constructor(props){
     super(props);
+    // region comes down from redux store
     this.state = {
       selected: props.region,
+
     }
   }
 
+  // This handleChange method hooks into the dropdown menu and redux
   handleChange = (event, name, selected) =>{
     this.setState({ selected });
-    const { handleChange } = this.props.formActions;
     const { onSelect } = this.props;
+    // dispatch region select
     onSelect(selected);
-    handleChange(event, name, selected);
   }
 
   render() {
