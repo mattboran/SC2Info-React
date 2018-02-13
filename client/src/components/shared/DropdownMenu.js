@@ -1,65 +1,42 @@
-import React, {Component} from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import React, { Component } from 'react';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 class DropdownMenu extends Component {
   constructor(props){
     super(props);
-    console.log(props.children);
+    this.state = {
+      selected: props.region,
+    }
   }
 
-  state = {
-    anchorEl: null,
-    selectedRegion: 'NA',
-  };
-
-  handleClick = event => {
-    this.setState({
-       anchorEl: event.currentTarget
-     });
-  };
-
-  clickedOnMenuItem(label){
-    this.setState({anchorEl: null, selectedRegion: label});
-    this.handleClose();
+  handleChange = (event, name, selected) =>{
+    this.setState({ selected });
+    const { handleChange } = this.props.formActions;
+    const { onSelect } = this.props;
+    onSelect(selected);
+    handleChange(event, name, selected);
   }
-
-  handleClose = () => {
-    this.setState({ ...this.state, anchorEl: null });
-  };
 
   render() {
-    const { anchorEl } = this.state;
-
+    const { selectedMenuItemStyle, dropDownValue} = this.props;
+    const { selected } = this.state;
     return (
       <div>
-        <FlatButton
-          aria-owns={anchorEl ? 'simple-menu' : null}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-          style={{marginTop: 5}}
-        >
-          Region
-        </FlatButton>
-        <Menu
-          id={this.props.id}
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-        {this.props.children}
-      </Menu>
+        <DropDownMenu
+          value = { selected }
+          selectedMenuItemStyle = { selectedMenuItemStyle }
+          >
+          {
+            this.props.children.map((child, index) => {
+              return <MenuItem {...child.props}
+                key={ index }
+                onClick={(event)=>this.handleChange(event, dropDownValue, child.props.value)}
+                />
+            })
+          }
+        </DropDownMenu>
     </div>
-        // {  // {this.props.children.map(menuItem => {
-        //   //   console.log("Menu Item: ", menuItem);
-        //   //   return <MenuItem onClick = {
-        //   //       this.clickedOnMenuItem.bind(this, menuItem.props.label)
-        //   //     }/>
-        //   // })}
-        //   // <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-        //   // <MenuItem onClick={this.handleClose}>My account</MenuItem>
-        //   // <MenuItem onClick={this.handleClose}>Logout</MenuItem>}
-        // // </Menu>
     );
   }
 }

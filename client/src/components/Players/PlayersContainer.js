@@ -1,8 +1,6 @@
 //Search bar, region select, match history etc on the right on desktop,
 //on mobile put these at the bottom
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { userActions } from '../../actions';
 import PlayersView from './PlayersView';
 
 class PlayersContainer extends Component{
@@ -30,16 +28,11 @@ class PlayersContainer extends Component{
     // this.handleClearUserClick = this.handleClearUserClick.bind(this);
     // this.selectIndividualUser = this.selectIndividualUser.bind(this);
   }
-
-  handleChange(e){
-    const { name, value } = e.target;
-    const { foundPlayer, searching, searchError } = this.state;
+  // handleChange hooks into the searchbar
+  handleChange(e, name, value){
     const { search } = this.state;
-
     this.setState({
-      searching,
-      searchError: false,
-      ...foundPlayer,
+      ...this.state,
       search: {
         ...search,
         [name] : value
@@ -48,23 +41,20 @@ class PlayersContainer extends Component{
   }
 
   render() {
-    const navActions = {
-      handleClearUserClick: this.handleClearUserClick
-    }
 
     const formActions = {
       handleChange: this.handleChange,
-      handleSubmit: this.handleSubmitSearch
+      // handleSubmit: this.handleSubmitSearch
     }
 
     const { searchError, searching } = this.props;
 
     const pass = {
-      ...this.state,
+      // ...this.state,
       searchError,
       searching,
       formActions,
-      navActions,
+      // navActions,
     }
     return <PlayersView {...pass} />
   }

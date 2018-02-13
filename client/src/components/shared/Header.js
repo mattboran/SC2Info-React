@@ -152,9 +152,6 @@ const TabStyle = {
     minWidth: '15%'
 };
 
-function mapStateToProps(state){
-  return state;
-}
 
 function mapDispatchToProps(dispatch){
   return {
@@ -162,4 +159,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(null, mapDispatchToProps)(Header);

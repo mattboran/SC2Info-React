@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
-import SearchBar from '../shared/SearchBar';
+import SearchBar from './SearchBar';
 
 class PlayersView extends Component{
-  constructor(props){
-    super(props);
-  }
-  renderSearchBox() {
+  renderSearchBox(props) {
+    const menuItems = ['NA', 'EU', 'KR', 'SEA'];
     return(
-      <SearchBar {...this.props} hintText={'Search for a user'} />
+      <SearchBar {...props} dropdownValue={'region'} items={menuItems} hintText={'Search for a user'} />
     )
   }
+  renderPlayersPage(){
+    const searchBox = this.renderSearchBox({...this.props});
+    return(
+      <div style = { playerPageStyle } >
+            <div>
+            { searchBox }
+            </div>
+            sometexthere
+      </div>
+    );
+  }
   render() {
-    const retVal = this.renderSearchBox();
-    return retVal;
+    return this.renderPlayersPage();
   }
 }
-
+const playerPageStyle = {
+  backgroundColor: '#aaa',
+  minHeight: '100%',
+  minWidth: '100%',
+  display: 'flex',
+  flexDirection: 'column'
+}
 export default PlayersView;

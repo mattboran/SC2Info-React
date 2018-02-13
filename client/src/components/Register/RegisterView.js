@@ -30,8 +30,8 @@ class RegisterView extends Component {
         </div>
       );
     }
+    // TODO: This also needs to be moved to the container
     checkForEntryErrors(user){
-
       const { email, username, password } = user;
       const regex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 
@@ -53,6 +53,8 @@ class RegisterView extends Component {
 
       return error;
     }
+
+    // TODO: This needs to be moved to the container
     updateViewForServerErrors(formError){
       const { error } = this.props.registerError;
       let finalError = {
@@ -67,13 +69,12 @@ class RegisterView extends Component {
     }
 
     renderRegisterBox() {
-
       const { user, submitted, formError } = this.props;
       const { handleChange, handleSubmit } = this.props.formActions;
       const { handleBackToLoginClick } = this.props.navActions;
 
       // This is the error that comes back from the server via DB
-
+      // TODO: This is messy, refactor this
       var finalError = formError;
       if (submitted){
         const err = this.checkForEntryErrors(user);
@@ -109,7 +110,7 @@ class RegisterView extends Component {
                 <TextField
                     name = "password"
                     value = { user.password }
-                    type="password"
+                    type= "password"
                     onChange = { handleChange }
                     errorText = { submitted && finalError.password !== '' ? finalError.password: ''}
                     hintText= { "Password" }
