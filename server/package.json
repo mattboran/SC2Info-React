@@ -1,27 +1,30 @@
 {
-  "name": "react-backend",
-  "version": "0.0.0",
-  "private": true,
+  "name": "sc2info-server",
+  "version": "1.0.0",
+  "description": "Server for my ReactJS sc2info client",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "test": "test",
+    "dev": "nodemon server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattboran/SC2Info-React.git"
+  },
+  "author": "Tudor Matt Boran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattboran/SC2Info-React/issues"
+  },
+  "homepage": "https://github.com/mattboran/SC2Info-React#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
-    "blizzard.js": "^2.2.0",
-    "body-parser": "~1.18.2",
+    "body-parser": "^1.18.2",
     "connect-pg-simple": "^4.2.1",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "dotenv": "^4.0.0",
-    "express": "~4.15.5",
-    "express-session": "^1.15.6",
-    "jade": "~1.11.0",
+    "express": "^4.16.2",
     "jsonwebtoken": "^8.1.1",
-    "morgan": "~1.9.0",
-    "nodemon": "^1.14.11",
+    "nodemon": "^1.14.12",
     "pg": "^7.4.1",
-    "pg-promise": "^7.4.0",
-    "serve-favicon": "~2.4.5",
-    "uuid": "^3.2.1"
+    "pg-promise": "^7.5.2"
   }
 }

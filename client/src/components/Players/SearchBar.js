@@ -19,16 +19,16 @@ const SearchBar = (props) => {
           region = { region }
           selectedMenuItemStyle={ { color: 'red' } }
           >
-          {props.items.map(val=>{
+          { otherProps.items.map(val=>{
             return <MenuItem primaryText = {val} key = {val} value = {val}/>
           })}
         </DropdownMenu>
         <TextField
 
           name = "playerName"
-          hintText = { props.hintText }
-          onChange = { (event) => props.formActions.handleChange(event) }
-          style = {searchBoxStyle}/>
+          hintText = { otherProps.hintText }
+          onChange = { (event) => otherProps.formActions.handleChange(event) }
+          style = { searchBoxStyle }/>
         <IconButton>
           <ActionSearch
             style = { searchButtonStyle }/>

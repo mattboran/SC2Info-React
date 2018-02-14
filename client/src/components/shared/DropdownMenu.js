@@ -8,7 +8,6 @@ class DropdownMenu extends Component {
     // region comes down from redux store
     this.state = {
       selected: props.region,
-
     }
   }
 
@@ -21,7 +20,7 @@ class DropdownMenu extends Component {
   }
 
   render() {
-    const { selectedMenuItemStyle, dropDownValue} = this.props;
+    const { selectedMenuItemStyle, dropDownValue } = this.props;
     const { selected } = this.state;
     return (
       <div>
