@@ -1,4 +1,5 @@
-import { SELECT_REGION } from './constants';
+import { SELECT_REGION,
+         SEARCH_PLAYER_REQUEST } from './constants';
 
 export function changeRegion(region){
   return dispatch => {
@@ -9,6 +10,14 @@ export function changeRegion(region){
 
 export function selectLadder(){
 
+}
+
+// Player searched for by the API
+export function searchPlayer(player){
+  return dispatch => {
+    dispatch(selectPlayerToSearch(player));
+  }
+  function selectPlayerToSearch(player) { return { type: SEARCH_PLAYER_REQUEST, payload: { player } } }
 }
 
 export function selectPlayer(){

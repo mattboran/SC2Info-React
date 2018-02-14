@@ -8,26 +8,34 @@ import DropdownMenu from '../shared/DropdownMenu';
 import { connect } from 'react-redux';
 import { viewActions } from '../../actions';
 
-const SearchBar = (props) => (
+const SearchBar = (props) => {
+      // prune props for passing down to DropdownMenu
+      const { dropdownValue, formActions, region, onSelect, ...otherProps } = props;
+      return(
       <Paper style = {paperStyle}>
         <DropdownMenu
-          {...props}
-          selectedMenuItemStyle={{color: 'red'}}
+          dropdownValue = { dropdownValue }
+          onSelect = { onSelect }
+          region = { region }
+          selectedMenuItemStyle={ { color: 'red' } }
           >
           {props.items.map(val=>{
             return <MenuItem primaryText = {val} key = {val} value = {val}/>
           })}
         </DropdownMenu>
         <TextField
-          hintText = {props.hintText}
+
+          name = "playerName"
+          hintText = { props.hintText }
+          onChange = { (event) => props.formActions.handleChange(event) }
           style = {searchBoxStyle}/>
         <IconButton>
           <ActionSearch
-            style = {searchButtonStyle}/>
+            style = { searchButtonStyle }/>
         </IconButton>
       </Paper>
     );
-
+}
 const searchButtonStyle = {
   flex: 1,
   alignSelf: 'center'

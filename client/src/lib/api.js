@@ -1,7 +1,22 @@
 const apiCalls = {
   fetchNews,
-  registerUser
+  registerUser,
+  loginUser,
+  searchPlayer
 }
+
+export function searchPlayer(player){
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    mode: 'same-origin',
+    credentials: 'include',
+    body: JSON.stringify(player)
+  };
+
+  return fetch('/api/players/search', requestOptions).then(handleResponse);
+}
+
 // TODO: Separate this into separate files
 export function fetchNews(){
   const requestOptions = {
@@ -14,6 +29,7 @@ export function fetchNews(){
   return fetch('/api/news', requestOptions).then(handleResponse);
 }
 
+// USER API CALLS
 export function registerUser(user) {
   const requestOptions = {
        method: 'POST',

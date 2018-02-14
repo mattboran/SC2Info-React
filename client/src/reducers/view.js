@@ -1,4 +1,5 @@
-import { SELECT_REGION } from '../actions/constants';
+import { SELECT_REGION,
+         SEARCH_PLAYER_REQUEST } from '../actions/constants';
 
 const defaultState = {
   region: 'NA',
@@ -14,6 +15,11 @@ export default function viewState(state = defaultState, action){
         ...state,
         region: action.payload.region
       };
+    case SEARCH_PLAYER_REQUEST:
+      return {
+        ...state,
+        playerSearched: action.payload.player
+      }
     default:
       return state;
   }

@@ -18,10 +18,7 @@ class PlayersContainer extends Component{
           divisionRank: ''
         }
       },
-      search: {
-        region : 'NA',
-        playerName : '',
-      }
+      playerName: ''
     }
     this.handleChange = this.handleChange.bind(this);
     //this.handleSubmitSearch = this.handleSubmitSearch.bind(this);
@@ -29,28 +26,21 @@ class PlayersContainer extends Component{
     // this.selectIndividualUser = this.selectIndividualUser.bind(this);
   }
   // handleChange hooks into the searchbar
-  handleChange(e, name, value){
-    const { search } = this.state;
+  handleChange(e){
+    const { name, value } = e.target;
     this.setState({
-      ...this.state,
-      search: {
-        ...search,
-        [name] : value
-      }
+      [name] : value
     });
   }
-
   render() {
 
     const formActions = {
       handleChange: this.handleChange,
-      // handleSubmit: this.handleSubmitSearch
     }
 
     const { searchError, searching } = this.props;
 
     const pass = {
-      // ...this.state,
       searchError,
       searching,
       formActions,
