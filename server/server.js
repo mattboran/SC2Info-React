@@ -1,7 +1,7 @@
 // server.js - main server
 
 const express     = require('express');
-const db          = require('./utils/database');
+const db          = require('./app/utils/database');
 const bodyParser  = require('body-parser');
 const app         = express();
 

@@ -1,9 +1,9 @@
 const bcrypt    = require('bcrypt');
+// const dbService = require('./db_service');
 
 module.exports = {
-  hashPassword: function(password) {
+  hashPassword: (password) => {
     const hashRounds = 10;
-    console.log("Password: ", password);
     return new Promise(function(resolve, reject){
       bcrypt.hash(password, hashRounds, function(err, hash){
         if (err) {
@@ -12,8 +12,6 @@ module.exports = {
           resolve(hash);
         }
       })
-    })
+    });
   }
-
-
 }
