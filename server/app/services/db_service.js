@@ -1,5 +1,4 @@
 const db = require('../utils/database');
-// const userService = require('./user_service.js');
 
 const statements = {
   INSERT_USER: 'register-user',

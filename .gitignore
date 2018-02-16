@@ -1,6 +1,11 @@
-./pgsql/*
-./client/node_modules/*
-./server/node_modules/*
-./server/utils/ca/*
-./server/utils/apikey.js
+/pgsql/*
+/client/node_modules/*
+/server/node_modules/*
+/server/utils/ca
+/server/utils/apikey.js
 .env
+/.idea
+/client/.idea
+/server/.idea
+test.json
+*.iml

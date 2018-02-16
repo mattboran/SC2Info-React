@@ -1,4 +1,4 @@
-module.exports = function(app, db) {
+module.exports = (app) => {
   app.get('/api/news', (req, res) => {
     res.json([{
       id: 1,
@@ -8,5 +8,5 @@ module.exports = function(app, db) {
       id: 2,
       title: "Title 2"
     }])
-  });
+  })
 };

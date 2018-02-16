@@ -1,11 +1,11 @@
-const pwService = require('./password_service');
-const dbService = require('./db_service');
+const authService   = require('./auth_service');
+const dbService     = require('./db_service');
 
 module.exports = {
   registerUser: (user) => {
     const { password } = user;
     return new Promise( (resolve, reject) => {
-      pwService.hashPassword(password)
+      authService.hashPassword(password)
         .then((hash) => {
           const preparedUser = {
             ...user,
@@ -22,14 +22,21 @@ module.exports = {
 
   loginUser: (user) => {
     return new Promise( (resolve, reject) => {
-      resolve(user);
+      dbService.dispatchPreparedStatement(dbService.actions.FETCH_USER, user)
+          .then((retrievedUser) => {
+              const providedPassword = user.password;
+              console.log("in loginUser: ", retrievedUser);
+              return authService.verifyUser(retrievedUser, providedPassword);
+          }).then((verifiedUser) => {
+              console.log("verified user in loginUser: ", verifiedUser);
+              return authService.generateJWT(verifiedUser);
+          }).then((token) => {
+              console.log("Generated token in loginUser: ", token);
+              resolve(token);
+          }).catch((err) => {
+              reject(err);
+          });
     });
-    // const { username, password } = user;
-    // return new Promise( (resolve, reject) => {
-    //   reject(10);
-    //   if (1){
-    //     resolve(10);
-    //   }
-    // });
-  },
+
+  }
 }
