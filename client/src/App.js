@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 
 // Google MaterialUI Imports
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -21,6 +21,9 @@ import Header from './components/shared/Header';
 import * as ActionCreators from './actions';
 
 class App extends Component {
+    componentWillMount(){
+        this.props.onFirstVisit();
+    }
     render(){
       const router = (
         <Switch>
@@ -63,7 +66,9 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators(ActionCreators, dispatch);
+    return {
+        onFirstVisit: () => dispatch(ActionCreators.userActions.returningLogin())
+    }
 }
 
  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

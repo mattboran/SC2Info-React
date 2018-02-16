@@ -1,8 +1,8 @@
 /pgsql/*
 /client/node_modules/*
 /server/node_modules/*
-/server/utils/ca
-/server/utils/apikey.js
+server/app/utils/ca
+/server/app/utils/apikey.js
 .env
 /.idea
 /client/.idea

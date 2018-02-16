@@ -25,18 +25,28 @@ module.exports = {
       dbService.dispatchPreparedStatement(dbService.actions.FETCH_USER, user)
           .then((retrievedUser) => {
               const providedPassword = user.password;
-              console.log("in loginUser: ", retrievedUser);
               return authService.verifyUser(retrievedUser, providedPassword);
           }).then((verifiedUser) => {
-              console.log("verified user in loginUser: ", verifiedUser);
               return authService.generateJWT(verifiedUser);
           }).then((token) => {
-              console.log("Generated token in loginUser: ", token);
               resolve(token);
           }).catch((err) => {
               reject(err);
           });
     });
+  },
 
-  }
+    validateReturningUser: (token) => {
+      return new Promise( (resolve, reject) => {
+          console.log("Trying to validate return user with token: ", token);
+          authService.validateJWT(token)
+              .then((user) => {
+                  console.log("user got, resolving: ", user);
+                  resolve(user);
+              }).catch((err) => {
+                  console.log("err got, rejecting: ", err);
+                  reject(err);
+              })
+      })
+    }
 }

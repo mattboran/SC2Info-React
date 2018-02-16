@@ -8,14 +8,21 @@ export default function login(state = {}, action) {
                 loggingIn: true,
                 loginError: false,
             };
+        case userConstants.RELOG_REQUEST:
+            return{
+                ...state,
+                loggingIn: true,
+                loginError: false
+            }
         case userConstants.LOGIN_SUCCESS:
             console.log("Action.payload: ", action.payload);
-            const { username, email, token } = action.payload.user;
+            const { sessId, username, email, token } = action.payload.user;
             return {
                 ...state,
                 loggingIn: false,
                 loginError: false,
                 auth: {
+                    sessId,
                     username,
                     email,
                     token

@@ -1,4 +1,4 @@
-import { registerUser, loginUser } from '../lib/api';
+import { registerUser, loginUser, checkReturningUser } from '../lib/api';
 import { history } from '../storeIndex';
 import * as userConstants from './constants';
 
@@ -41,6 +41,25 @@ export function login(user){
   function request(user) { return { type: userConstants.LOGIN_REQUEST, payload: { user } } }
   function success(user) { return { type: userConstants.LOGIN_SUCCESS, payload: { user } } }
   function failure(error) { return { type: userConstants.LOGIN_FAILURE, payload: { error } } }
+}
+
+export function returningLogin(){
+    return dispatch => {
+        dispatch(request());
+        checkReturningUser()
+            .then(
+                user => {
+                    dispatch(success(user));
+                    console.log('Successful relog of ', user.username);
+                    },
+                error => {
+                    dispatch(failure(error));
+                }
+            );
+    };
+    function request(user) { return { type: userConstants.RELOG_REQUEST, payload: { user } } }
+    function success(user) { return { type: userConstants.LOGIN_SUCCESS, payload: { user } } }
+    function failure(error) { return { type: userConstants.LOGIN_FAILURE, payload: { error } } }
 }
 
 export function logout(){

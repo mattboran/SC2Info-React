@@ -1,5 +1,6 @@
 const pwService = require('./password_service');
-const key       = require('../utils/keys');
+const key       = require('../utils/keys').key;
+const secret    = require('../utils/secret');
 const jwt       = require('jsonwebtoken');
 
 module.exports = {
@@ -32,19 +33,29 @@ module.exports = {
 
             jwt.sign({ data:{ id, username, email }},
                 key,
-                { algorithm: 'RS256', expiresIn: '3d' }, (err, token) => {
+                { expiresIn: '3d' }, (err, token) => {
                         if (err){
                             reject(err);
                         } else {
                             const data = {
-                                id,
                                 username,
                                 email,
                                 token
                             };
+
                             resolve(data);
                         }
                 });
         });
-    }
+    },
+    validateJWT: (token) => {
+        return new Promise( (resolve, reject) => {
+            jwt.verify(token, key, (err, decoded) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(decoded);
+            });
+        });
+    },
 };

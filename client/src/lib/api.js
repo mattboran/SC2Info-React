@@ -9,8 +9,7 @@ export function searchPlayer(player){
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    mode: 'same-origin',
-    credentials: 'include',
+    credentials: 'same-origin',
     body: JSON.stringify(player)
   };
 
@@ -22,8 +21,7 @@ export function fetchNews(){
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
-    mode: 'same-origin',
-    credentials: 'include'
+    credentials: 'same-origin'
   };
 
   return fetch('/api/news', requestOptions).then(handleResponse);
@@ -34,7 +32,9 @@ export function registerUser(user) {
   const requestOptions = {
        method: 'POST',
        headers: { 'Content-Type' : 'application/json' } ,
+       credentials: 'same-origin',
        body: JSON.stringify(user)
+
    };
    return fetch('/api/users/register', requestOptions).then(handleResponse);
 }
@@ -43,9 +43,19 @@ export function loginUser(user){
   const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type' : 'application/json' },
+      credentials: 'same-origin',
       body: JSON.stringify(user)
+
   };
   return fetch('/api/users/signin', requestOptions).then(handleResponse);
+}
+
+export function checkReturningUser() {
+    const requestOptions = {
+        method: 'POST',
+        credentials: 'same-origin',
+    }
+    return fetch('/api/users/pre-signin',requestOptions).then(handleResponse);
 }
 
 function handleResponse(response){
