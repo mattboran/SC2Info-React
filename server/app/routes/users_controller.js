@@ -1,27 +1,33 @@
-const passwordService = require('../services/password_service');
+// const passwordService = require('../services/password_service');
 const userService = require('../services/user_service');
 
 module.exports = function(app, db){
-  app.post('/api/users/testHash', (req, res) => {
-    const {password} = req.body;
-    passwordService.hashPassword(password)
-      .then((pass) =>{
-        console.log(pass);
-      }).catch((err) =>{
-        console.log("error: ", err);
-      });
-  }),
   app.post('/api/users/register', (req, res) => {
     const user = req.body;
     console.log("User: ", user);
     userService.registerUser(user)
       .then((userID) =>{
-        console.log("Registered user with ID: ", userID);
-        res.send(userID);
+        res.json(userID);
       }).catch((err) => {
-        console.log("Error registering user: ", err);
+        const { constraint } = err;
+        res.status(403).json(constraint);
       });
-  })
+  }),
+  app.post('/api/users/login', (req, res) => {
+    const user = req.body;
+    console.log("User: ", user);
+    userService.loginUser(user)
+      .then((token) => {
+        const retVal = {
+          ...user,
+          password: 'password-omitted',
+          token
+        };
+        res.json(retVal);
+      }).catch((err) => {
+        res.status(403).json(err);
+      });
+  }),
   app.get('/healthCheck', (req, res)=> {
     res.send(200);
   })

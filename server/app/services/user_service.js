@@ -2,25 +2,34 @@ const pwService = require('./password_service');
 const dbService = require('./db_service');
 
 module.exports = {
-  registerUser: function(user){
+  registerUser: (user) => {
     const { password } = user;
-    return new Promise(function(resolve, reject){
+    return new Promise( (resolve, reject) => {
       pwService.hashPassword(password)
         .then((hash) => {
-          let preparedUser = {
+          const preparedUser = {
             ...user,
             password: hash,
           };
-          console.log("Password got: ", hash);
-          console.log("Dispatching prepared statement: ", dbService.actions.REGISTER_USER);
-          return dbService.dispatchPreparedStatement(dbService.actions.REGISTER_USER, preparedUser);
+          return dbService.dispatchPreparedStatement(dbService.actions.INSERT_USER, preparedUser);
         }).then((userID) => {
-          console.log("Successfully registered user with ID: ", userID);
-          return userID;
+          resolve(userID);
         }).catch((err) => {
-          console.log("Error in register user:", err);
-          return err;
+          reject(err);
         })
     });
-  }
+  },
+
+  loginUser: (user) => {
+    return new Promise( (resolve, reject) => {
+      resolve(user);
+    });
+    // const { username, password } = user;
+    // return new Promise( (resolve, reject) => {
+    //   reject(10);
+    //   if (1){
+    //     resolve(10);
+    //   }
+    // });
+  },
 }

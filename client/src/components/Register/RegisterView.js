@@ -60,7 +60,7 @@ class RegisterView extends Component {
       let finalError = {
         ...formError
       };
-      if ( error === 'uniqueemail'){
+      if ( error === 'uniqueemail' ){
           finalError.email = 'Email is already in use!';
       } else if (error === 'uniquename'){
           finalError.username = 'Username is already in use!';

@@ -1,0 +1,6 @@
+./pgsql/*
+./client/node_modules/*
+./server/node_modules/*
+./server/utils/ca/*
+./server/utils/apikey.js
+.env
