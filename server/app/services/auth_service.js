@@ -1,6 +1,5 @@
 const pwService = require('./password_service');
 const key       = require('../utils/keys').key;
-const secret    = require('../utils/secret');
 const jwt       = require('jsonwebtoken');
 
 module.exports = {

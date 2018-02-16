@@ -24,6 +24,8 @@ module.exports = (app) => {
                     username,
                     email
                 };
+                req.session.logged = true;
+                req.session.user = username;
                 res.cookie('token', token).json(retVal);
             }).catch((err) => {
                 res.status(403).json(err);
@@ -42,8 +44,14 @@ module.exports = (app) => {
                 };
                 res.json(retVal);
             }).catch((err) => {
-                res.send(err);
+                res.status(403).json(err);
             });
+    }),
+    app.post('/api/users/logout', (req, res) => {
+        req.session.logged = false;
+        const username = req.session.user;
+        req.session.user = null;
+        res.cookie('token', null).json(username);
     }),
     app.get('/healthCheck', (req, res)=> {
         res.send(200);

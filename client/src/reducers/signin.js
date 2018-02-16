@@ -37,6 +37,7 @@ export default function login(state = {}, action) {
         case userConstants.LOGOUT:
             console.log("Logging out");
             return {
+                ...state,
                 auth: null
             };
         default:

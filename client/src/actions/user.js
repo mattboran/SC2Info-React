@@ -1,4 +1,4 @@
-import { registerUser, loginUser, checkReturningUser } from '../lib/api';
+import { registerUser, loginUser, checkReturningUser, logoutUser } from '../lib/api';
 import { history } from '../storeIndex';
 import * as userConstants from './constants';
 
@@ -63,7 +63,8 @@ export function returningLogin(){
 }
 
 export function logout(){
-  return dispatch => {
-    dispatch({ type: userConstants.LOGOUT });
-  };
+    return dispatch => {
+        logoutUser();
+        dispatch({ type: userConstants.LOGOUT });
+    };
 }

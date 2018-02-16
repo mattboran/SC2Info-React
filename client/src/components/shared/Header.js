@@ -88,7 +88,7 @@ class NavLinks extends  Component{
         const getTabValue = mountTabValueFactory(location, tabId);
         var loginButton = <LoginButton />;
         if (this.props.auth ){
-          if (this.props.auth.user !== ""){
+          if (this.props.auth.sessId){
             loginButton = <Logged {...this.props}/>
           }
         }

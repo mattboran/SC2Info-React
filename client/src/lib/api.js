@@ -58,9 +58,20 @@ export function checkReturningUser() {
     return fetch('/api/users/pre-signin',requestOptions).then(handleResponse);
 }
 
+export function logoutUser() {
+    const requestOptions = {
+        method: 'POST',
+        credentials: 'same-origin',
+    }
+    return fetch('/api/users/logout', requestOptions).then(handleResponse);
+}
+
 function handleResponse(response){
   if(!response.ok){
     return response.json({err:'err'}).then(Promise.reject.bind(Promise));
+  }
+  if (!response.body) {
+      return response;
   }
   return response.json();
 }
