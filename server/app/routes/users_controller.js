@@ -53,8 +53,12 @@ module.exports = (app) => {
         req.session.user = null;
         res.cookie('token', null).json(username);
     }),
-    app.get('/healthCheck', (req, res)=> {
-        res.send(200);
+    app.get('/api/authcheck', (req, res)=> {
+        if (req.isAuthenticated()){
+            console.log("Req is authenticated; user: ", req.user);
+            res.sendStatus(200);
+        }
+        res.sendStatus(403);
     })
 
 };

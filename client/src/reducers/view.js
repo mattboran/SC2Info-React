@@ -16,10 +16,10 @@ export default function viewState(state = defaultState, action){
                 region: action.payload.region
             };
         case SEARCH_PLAYER_REQUEST:
-            console.log("payload: ", action.payload);
+            const { player } = action.payload;
             return {
                 ...state,
-                playerSearched: action.payload
+                playerSearched: player
             }
         default:
             return state;
