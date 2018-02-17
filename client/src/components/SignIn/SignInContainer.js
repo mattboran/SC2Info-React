@@ -22,7 +22,7 @@ class SignInContainer extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
       this.validateForm = this.validateForm.bind(this);
       this.handleChange = this.handleChange.bind(this);
-    }
+  }
 
     handleBackToLoginClick(){
         this.props.history.replace("/Register");

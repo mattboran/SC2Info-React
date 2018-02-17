@@ -5,7 +5,7 @@ class PlayersView extends Component{
   renderSearchBox(props) {
     const menuItems = ['NA', 'EU', 'KR', 'SEA'];
     return(
-      <SearchBar {...props} dropdownValue={'region'} items={menuItems} hintText={'Search for a user'} />
+      <SearchBar {...props} dropdownValue={'region'} items={menuItems} searchbarName={'playerName'} hintText={'Search for a user'} />
     )
   }
   renderPlayersPage(){

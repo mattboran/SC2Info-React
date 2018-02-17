@@ -2,16 +2,17 @@
 // import { history } from '../storeIndex';
 // import { registerUser, loginUser } from '../lib/api';
 import { register, login, logout, returningLogin } from './user';
-import { changeRegion, selectLadder, selectPlayer } from './view';
+import { changeRegion, selectLadder, selectPlayer, searchPlayer } from './view';
 
 export const userActions = {
-      login,
-      logout,
-      register,
-      returningLogin,
+    login,
+    logout,
+    register,
+    returningLogin,
 }
 export const viewActions = {
-      changeRegion,
-      selectLadder,
-      selectPlayer
+    changeRegion,
+    selectLadder,
+    selectPlayer,
+    searchPlayer
 }

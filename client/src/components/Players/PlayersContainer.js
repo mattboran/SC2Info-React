@@ -4,50 +4,51 @@ import React, { Component } from 'react';
 import PlayersView from './PlayersView';
 
 class PlayersContainer extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      searching: false,
-      searchError: false,
-      foundPlayer: {
-        username: '',
-        region: '',
-        ladders: {
-          league: '',
-          subleague: '',
-          divisionRank: ''
+    constructor(props){
+        super(props);
+        this.state = {
+            searching: false,
+            searchError: false,
+            foundPlayer: {
+                username: '',
+                region: '',
+                ladders: {
+                    league: '',
+                    subleague: '',
+                    divisionRank: ''
+                }
+            },
+            playerName: ''
         }
-      },
-      playerName: ''
+        this.handleChange = this.handleChange.bind(this);
+        //this.handleSubmitSearch = this.handleSubmitSearch.bind(this);
+        // this.handleClearUserClick = this.handleClearUserClick.bind(this);
+        // this.selectIndividualUser = this.selectIndividualUser.bind(this);
     }
-    this.handleChange = this.handleChange.bind(this);
-    //this.handleSubmitSearch = this.handleSubmitSearch.bind(this);
-    // this.handleClearUserClick = this.handleClearUserClick.bind(this);
-    // this.selectIndividualUser = this.selectIndividualUser.bind(this);
-  }
-  // handleChange hooks into the searchbar
-  handleChange(e){
-    const { name, value } = e.target;
-    this.setState({
-      [name] : value
-    });
-  }
-  render() {
-
-    const formActions = {
-      handleChange: this.handleChange,
+    // handleChange hooks into the searchbar
+    handleChange(e){
+        const { name, value } = e.target;
+        this.setState({
+            [name] : value
+        });
     }
+    render() {
 
-    const { searchError, searching } = this.props;
+        const formActions = {
+            handleChange: this.handleChange,
+        }
 
-    const pass = {
-      searchError,
-      searching,
-      formActions,
-      // navActions,
+        const { searchError, searching } = this.props;
+        const { playerName } = this.state;
+        const pass = {
+            searchError,
+            searching,
+            formActions,
+            searchValue: playerName
+            // navActions,
+        }
+        return <PlayersView {...pass} />
     }
-    return <PlayersView {...pass} />
-  }
 }
 
 export default PlayersContainer;
