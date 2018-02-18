@@ -13,9 +13,16 @@ module.exports = (app, passport) => {
         // })),
 
     app.get('/auth/bnet/callback',
-        passport.authenticate('bnet', { failureRedirect: '/' }),
+        passport.authenticate('bnet', { successRedirect: '/success', failureRedirect: '/fail' }),
         function(req, res){
+            console.log(req.account);
             console.log("Passport: ", passport);
             res.json(req.passport.user);
-        });
+        }),
+    app.get('/fail', (req, res) => {
+        console.log("Fail cb");
+    }),
+    app.get('/success', (req, res) => {
+        console.log("success cb");
+    })
 }

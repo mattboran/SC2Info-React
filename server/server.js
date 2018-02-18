@@ -43,7 +43,7 @@ passport.deserializeUser((user, done) => { done(null, user); });
 passport.use(new BnetStrategy({
     clientID: BNET_ID,
     clientSecret: BNET_SECRET,
-    callbackURL: "https://localhost:3001/auth/bnet/callback"
+    callbackURL: "https://127.0.0.1:3001/auth/bnet/callback"
 }, function(accessToken, refreshToken, profile, done) {
     console.log("AccessToken: ", accessToken);
     console.log("RefreshToken: ", refreshToken);
