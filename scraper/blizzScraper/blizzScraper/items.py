@@ -10,6 +10,7 @@ import scrapy
 
 class ProfileLink(scrapy.Item):
     url = scrapy.Field()
-    playerName = scrapy.Field()
-    playerId = scrapy.Field()
+    name = scrapy.Field()
+    region = scrapy.Field()
+    id = scrapy.Field()
     pass
