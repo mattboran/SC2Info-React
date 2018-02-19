@@ -3,8 +3,9 @@ const db = require('../utils/database');
 const statements = {
     INSERT_USER: 'register-user',
     FETCH_USER: 'fetch-user',
-    STORE_OAUTH_TOKEN: 'store-token',
-    GET_OAUTH_TOKEN: 'fetch-token'
+    SEARCH_PLAYER: 'search-player',
+    SEARCH_PROFILE: 'search-profile'
+
 }
 
 const DB_ERROR = "Error dispatching prepared statement!";
@@ -40,32 +41,22 @@ const fetchUser = (user) => {
     });
 }
 
-const storeToken = (token) => {
+const searchPlayer = (player) => {
+    const {name, region} = player;
     return new Promise( (resolve, reject) => {
         db.one({
-            name: statements.STORE_OAUTH_TOKEN,
-            text: 'INSERT INTO blizzOAuthTokens values ($/val:json/);',
-            values: [token]
-        }).then((resp) => {
+            name: statements.SEARCH_PLAYER,
+            text: 'SELECT * FROM player_ids WHERE name = $1 AND region = $2',
+            values: [name, region]
+        }),then((resp) => {
             resolve(resp);
-        }).catch((err) => {
+        }).catch((err) =>{
             reject(err);
         });
     });
+
 }
 
-const getToken = () => {
-    return new Promise( (resolve, reject) => {
-        db.one({
-            name: statements.GET_OAUTH_TOKEN, // TODO: This is not right!!
-            text: 'SELECT * from blizzOAuthTokens;'
-        }).then((token) => {
-            resolve(token);
-        }).catch((err) => {
-            reject(err);
-        });
-    });
-}
 
 module.exports = {
     actions: statements,
@@ -93,20 +84,11 @@ module.exports = {
                     })
                 });
                 break;
-            case statements.STORE_OAUTH_TOKEN:
+            case statements.SEARCH_PLAYER:
                 return new Promise( (resolve, reject) => {
-                    storeToken(token)
-                        .then(() => {resolve('ok')})
-                        .catch((err)=> {reject(err)});
-                });
-                break;
-            case statements.GET_OAUTH_TOKEN:
-                return new Promise( (resolve, reject) => {
-                    getToken()
-                        .then((token) => {resolve(token)})
-                        .catch((err) => {reject(err)});
-                });
-                break;
+                    searchPlayer(data)
+                        .then(())
+                })
             default:
                 console.log('Invalid database action type!');
                 break;

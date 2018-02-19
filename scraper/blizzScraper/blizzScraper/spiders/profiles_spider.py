@@ -12,9 +12,9 @@ class ProfilesSpider(scrapy.Spider):
 
         with open('scraped.txt', 'r') as f:
             previously_scraped = f.readlines()
-            start_index = int(previously_scraped[1].split(':')[-1]) + 1
+            start_index = int(previously_scraped[-1].split(':')[-1]) + 1
 
-        profile_ids = [start_index + i for i in range(100)]
+        profile_ids = [start_index + i for i in range(2000)]
 
         num_urls_scraped = 0
         urls = [

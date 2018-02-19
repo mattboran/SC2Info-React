@@ -26,8 +26,6 @@
     "express-session": "^1.15.6",
     "jsonwebtoken": "^8.1.1",
     "nodemon": "^1.14.12",
-    "passport": "^0.4.0",
-    "passport-bnet": "^1.2.1",
     "pg": "^7.4.1",
     "pg-promise": "^7.5.2"
   }

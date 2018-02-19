@@ -50,7 +50,7 @@ export function returningLogin(){
             .then(
                 user => {
                     dispatch(success(user));
-                    console.log('Successful relog of ', user.username);
+                    //console.log('Successful relog of ', user.username);
                     },
                 error => {
                     dispatch(failure(error));
