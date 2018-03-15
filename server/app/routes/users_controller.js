@@ -33,19 +33,23 @@ module.exports = (app) => {
     }),
     app.post('/api/users/pre-signin', (req, res) => {
         const token = req.cookies['token'];
-        userService.validateReturningUser(token)
-            .then((user) => {
-                const { username, email } = user.data;
-                const sessId = req.sessionID;
-                const retVal = {
-                    sessId,
-                    username,
-                    email
-                };
-                res.json(retVal);
-            }).catch((err) => {
+        if (!token){
+            res.status(403).json({err:"err"});
+        } else {
+            userService.validateReturningUser(token)
+                .then((user) => {
+                    const {username, email} = user.data;
+                    const sessId = req.sessionID;
+                    const retVal = {
+                        sessId,
+                        username,
+                        email
+                    };
+                    res.json(retVal);
+                }).catch((err) => {
                 res.status(403).json(err);
             });
+        }
     }),
     app.post('/api/users/logout', (req, res) => {
         req.session.logged = false;

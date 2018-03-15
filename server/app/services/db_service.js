@@ -43,12 +43,18 @@ const fetchUser = (user) => {
 
 const searchPlayer = (player) => {
     const {name, region} = player;
+    let numeric_region = 1;
+    if (region === "EU") { numeric_region = 2; }
+    // TODO: is this correct?
+    if (region === "SEA") { numeric_region = 3; }
+    if (region === "KR") { numeric_region = 4; }
+
     return new Promise( (resolve, reject) => {
         db.one({
             name: statements.SEARCH_PLAYER,
             text: 'SELECT * FROM player_ids WHERE name = $1 AND region = $2',
-            values: [name, region]
-        }),then((resp) => {
+            values: [name, numeric_region]
+        }).then((resp) => {
             resolve(resp);
         }).catch((err) =>{
             reject(err);
@@ -79,7 +85,6 @@ module.exports = {
                         .then((user) => {
                             resolve(user); // Returns all props of user in table
                         }).catch((err) => {
-                        console.log("Dispatch prepared statement failed with: ", err);
                         reject(err);
                     })
                 });
@@ -87,8 +92,12 @@ module.exports = {
             case statements.SEARCH_PLAYER:
                 return new Promise( (resolve, reject) => {
                     searchPlayer(data)
-                        .then(())
-                })
+                        .then((user) => {
+                            resolve(user);
+                        }).catch((err) => {
+                        reject(err);
+                    })
+                });
             default:
                 console.log('Invalid database action type!');
                 break;

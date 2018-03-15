@@ -4,7 +4,7 @@ const apiCalls = {
     loginUser,
     checkReturningUser,
     logoutUser,
-    searchForPlayer
+    searchForPlayer,
 }
 
 export function searchForPlayer(player, region){
@@ -14,8 +14,17 @@ export function searchForPlayer(player, region){
         credentials: 'same-origin',
         body: JSON.stringify({player, region})
     };
-
     return fetch('/api/players/search', requestOptions).then(handleResponse);
+}
+
+export function searchPlayerDetail(player, region){
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({player, region})
+    };
+    return fetch('/api/players/searchDetail', requestOptions).then(handleResponse);
 }
 
 // TODO: Separate this into separate files
