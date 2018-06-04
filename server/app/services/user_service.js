@@ -39,6 +39,9 @@ module.exports = {
     validateReturningUser: (token) => {
       return new Promise( (resolve, reject) => {
           console.log("Trying to validate return user with token: ", token);
+          if (!token) {
+              resolve(token);
+          }
           authService.validateJWT(token)
               .then((user) => {
                   console.log("user got, resolving: ", user);

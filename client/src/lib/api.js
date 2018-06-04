@@ -1,53 +1,64 @@
 const apiCalls = {
-  fetchNews,
-  registerUser,
-  loginUser,
-  searchPlayer
+    fetchNews,
+    registerUser,
+    loginUser,
+    checkReturningUser,
+    logoutUser,
+    searchForPlayer,
 }
 
-export function searchPlayer(player){
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'same-origin',
-    body: JSON.stringify(player)
-  };
+export function searchForPlayer(player, region){
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({player, region})
+    };
+    return fetch('/api/players/search', requestOptions).then(handleResponse);
+}
 
-  return fetch('/api/players/search', requestOptions).then(handleResponse);
+export function searchPlayerDetail(player, region){
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({player, region})
+    };
+    return fetch('/api/players/searchDetail', requestOptions).then(handleResponse);
 }
 
 // TODO: Separate this into separate files
 export function fetchNews(){
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'same-origin'
-  };
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin'
+    };
 
-  return fetch('/api/news', requestOptions).then(handleResponse);
+    return fetch('/api/news', requestOptions).then(handleResponse);
 }
 
 // USER API CALLS
 export function registerUser(user) {
-  const requestOptions = {
-       method: 'POST',
-       headers: { 'Content-Type' : 'application/json' } ,
-       credentials: 'same-origin',
-       body: JSON.stringify(user)
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json' } ,
+        credentials: 'same-origin',
+        body: JSON.stringify(user)
 
-   };
-   return fetch('/api/users/register', requestOptions).then(handleResponse);
+    };
+    return fetch('/api/users/register', requestOptions).then(handleResponse);
 }
 
 export function loginUser(user){
-  const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type' : 'application/json' },
-      credentials: 'same-origin',
-      body: JSON.stringify(user)
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify(user)
 
-  };
-  return fetch('/api/users/signin', requestOptions).then(handleResponse);
+    };
+    return fetch('/api/users/signin', requestOptions).then(handleResponse);
 }
 
 export function checkReturningUser() {
@@ -67,13 +78,13 @@ export function logoutUser() {
 }
 
 function handleResponse(response){
-  if(!response.ok){
-    return response.json({err:'err'}).then(Promise.reject.bind(Promise));
-  }
-  if (!response.body) {
-      return response;
-  }
-  return response.json();
+    if(!response.ok){
+        return response.json({err:'err'}).then(Promise.reject.bind(Promise));
+    }
+    if (!response.body) {
+        return response;
+    }
+    return response.json();
 }
 
 export default apiCalls;
