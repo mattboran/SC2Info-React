@@ -1,7 +1,13 @@
-const apikey = require('../utils/apikey');
-const blizz = require('blizzard.js').initialize({ apikey });
+// Servicing player-relayed requests from the API
+
+const apikey = require('../utils/apikey').apikey;
+//TODO: remove this, if we can.
+const util = require('util');
+const axios = require('axios');
+const blizz = require('blizzard.js').initialize({ apikey }, axios);
 const dbService = require('./db_service');
 
+// Blizzard API compatable string comes from client. Change to format compatible with our DB
 function regionToString(region) {
     switch(region){
         case(1):
@@ -19,6 +25,24 @@ function regionToString(region) {
     }
 }
 
+function callBlizzApiForProfile(name, id, region) {
+
+    const url = "https://us.api.battle.net/sc2/profile/"
+        +id+"/"+region+"/"+name
+        +"/?locale=en_US&apikey="+apikey;
+
+    return new Promise( (resolve, reject) => {
+        axios({method: 'get', url: url }).then(response => {
+                    const {displayName, clanName, career} = response.data;
+                    resolve({displayName, clanName, career});
+              }).catch(err => {
+                    console.log("Got an error: " + err);
+                    reject(err);
+              })
+    })
+}
+
+
 module.exports = {
     getTop: (region, start, end) => {
         blizz.sc2.ladder([]);
@@ -26,7 +50,7 @@ module.exports = {
     searchPlayerId: (player, region) => {
         return new Promise( (resolve, reject) => {
             const data = { name: player, region };
-            // First check for player ID
+            // First check for player ID in the DB
             dbService.dispatchPreparedStatement(dbService.actions.SEARCH_PLAYER, data)
                 .then((player_id) => {
                     const { id, name } = player_id;
@@ -35,23 +59,20 @@ module.exports = {
                     resolve(api_data);
                 }).catch((err) => {
                     const { message } = err;
-                    console.log("The error from playerId: ", err);
                     reject(err);
                 });
         });
     },
     searchPlayerDetail: (player, region) => {
+        const {id, name} = player;
         return new Promise( (resolve, reject) => {
-            const {id, name} = player;
-            const reg = regionToString(region);
-            blizz.sc2.profile(['profile'], {origin: reg, id, name})
-                .then(response => {
-                    console.log(response);
-                    resolve(response);
-                }).catch(err => {
-                    console.log(err);
-                    reject(err);
-            });
+            callBlizzApiForProfile(name, id, region).then(response => {
+                console.log("Response!");
+                resolve(response);
+            }).catch(err => {
+                console.log("Error!!!");
+                reject(err);
+            })
         })
     }
     // searchPlayerProfile: (id, name, origin) => {

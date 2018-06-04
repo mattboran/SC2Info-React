@@ -48,17 +48,17 @@ SelectableList = wrapState(SelectableList);
 
 const SearchPlayers = (props) => {
     const { search, defaultVal, player, onSelectPlayer } = props;
-    const listItems = player.map((data) =>
-        <ListItem
-            value = {data.playerId}
-            primaryText = {data.playerName}
-            leftAvatar = { <Avatar src={mapRankToImage()}/>}
-            onClick = {onSelectPlayer({
-                    playerName: data.playerName,
-                    playerId: data.playerId,
-                    region: data.region
-                })}/>
-    );
+    // const listItems = player.map((data) =>
+    //     <ListItem
+    //         value = {data.playerId}
+    //         primaryText = {data.playerName}
+    //         leftAvatar = { <Avatar src={mapRankToImage()}/>}
+    //         onClick = {onSelectPlayer({
+    //                 playerName: data.playerName,
+    //                 playerId: data.playerId,
+    //                 region: data.region
+    //             })}/>
+    // );
     return(
         <SelectableList defaultValue={defaultVal}>
             <ListItem

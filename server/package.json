@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mattboran/SC2Info-React#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt": "^1.0.3",
     "blizzard.js": "^2.3.0",
     "body-parser": "^1.18.2",
@@ -29,5 +30,8 @@
     "nodemon": "^1.14.12",
     "pg": "^7.4.1",
     "pg-promise": "^7.5.2"
+  },
+  "devDependencies": {
+    "util": "^0.10.4"
   }
 }
