@@ -13,7 +13,6 @@ module.exports = (app) => {
     }),
     app.post('/api/players/search', (req, res) => {
         const {player, region} = req.body;
-        console.log("Route for player search got to with request:" + req.body)
         playerService.searchPlayerId(player, region)
             .then((player_id) => {
                 res.json(player_id);
@@ -30,8 +29,6 @@ module.exports = (app) => {
                 res.json(data);
             }).catch(err => {
                 res.status(404).json("err");
-            // res.status(404).json(err);
-
         });
 
     })
