@@ -19,7 +19,7 @@ hyperlink==17.3.1
 idna==2.6
 incremental==17.5.0
 louis==2.6.4
-lxml==4.1.1
+lxml==4.6.2
 oauthlib==1.0.3
 oneconf==0.3.9
 parsel==1.4.0
